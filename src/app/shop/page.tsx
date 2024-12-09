@@ -86,9 +86,9 @@ function Shop() {
         <div className="flex justify-center items-center">
           <Image src={shopicon} alt="shop icon" className="w-16 lg:w-[100px]" />
         </div>
-        <h1 className="text-3xl lg:text-6xl font-medium">Cart</h1>
+        <h1 className="text-3xl lg:text-6xl font-medium">Shop</h1>
         <p className="text-sm lg:text-xl font-semibold py-3 lg:py-5">
-          <span className="font-bold">Home</span> &gt; Cart
+          <span className="font-bold">Home</span> &gt; Shop
         </p>
       </div>
     </div>
