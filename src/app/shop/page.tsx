@@ -34,84 +34,106 @@ import Link from 'next/link';
 function Shop() {
   return (
     <div>
-        {/* navbar  */}
-        <section id='Shop'>
-        <div className='max-w-full bg-[#ffffff]'>
-        <div className='max-w-7xl mx-auto py-10 px-10'>
-  <nav className="flex justify-between items-center px-8 py-4 ">
-    {/* Left Menu */}
-    {/* Navigation Links */}
-    <ul className="flex space-x-24 text-gray-700">
-      <li>
-      <Link href={"#"} className="hover:text-black text-lg font-bold">
-      Home</Link>
-      </li>
-      <li>
-      <Link href={"/shop"} className="hover:text-black text-lg font-bold">
-      Shop</Link>
-      </li>
-      <li>
-        <a href="#" className="hover:text-black text-lg font-bold">
-          About
-        </a>
-      </li>
-      <li>
-        <a href="/contact" className="hover:text-black text-lg font-bold">
-          Contact
-        </a>
-      </li>
-    </ul>
-    {/* Icons */}
-    <div className="flex space-x-10 text-gray-700">
-      <span className="material-icons"><Image src={manicon} alt='icon' className='w-[50px] cursor-pointer'></Image></span>
-      <span className="material-icons "><Image src={manicon1} alt='icon' className='w-[50px] cursor-pointer'></Image></span>
-      <span className="material-icons"><Image src={manicon2} alt='icon' className='w-[50px] cursor-pointer'></Image></span>
-      <span className="material-icons"><Image src={manicon3} alt='icon' className='w-[50px] cursor-pointer'></Image></span>
-    </div>
-  </nav>
-    </div>
-    </div>
-        </section>
-        {/* shop  hero div*/}
-        <div className='max-w-full relative'>
-        <Image src={shopbg} alt='bg pic instagram' className='w-full h-[700px] object-cover opacity-25'/>
-        <div className='max-w-7xl mx-auto py-10 px-10'>
-          <div className='flex justify-center items-center absolute inset-0'>
-          <div className='text-center'>
-            <div className='flex justify-center items-center'>
-            <Image src={shopicon} alt='shop icon' className='w-[100px]'></Image>
-            </div>
-            <h1 className='text-6xl font-medium'>Shop</h1>
-            <p className='text-xl font-semibold py-5'><span className='font-bold'>Home</span> &gt; Shop </p>
-          </div>
-          </div>
+<section>
+  <div className="max-w-full bg-[#ffffff]">
+    <div className="max-w-7xl mx-auto py-6 px-6 lg:px-10">
+      <nav className="flex flex-wrap justify-between items-center px-4 py-3">
+        {/* Navigation Links */}
+        <ul className="flex flex-wrap justify-center space-x-6 lg:space-x-24 text-gray-700 text-sm lg:text-lg">
+          <li>
+            <Link href={"/"} className="hover:text-black font-bold">
+              Home
+            </Link>
+          </li>
+          <li>
+            <Link href={"/shop"} className="hover:text-black font-bold">
+              Shop
+            </Link>
+          </li>
+          <li>
+            <a href="#" className="hover:text-black font-bold">
+              About
+            </a>
+          </li>
+          <li>
+            <Link href={"/contact"} className="hover:text-black font-bold">
+              Contact
+            </Link>
+          </li>
+        </ul>
+        {/* Icons */}
+        <div className="flex flex-wrap justify-center space-x-4 lg:space-x-10 text-gray-700 mt-4 lg:mt-0">
+          <Image src={manicon} alt="icon" className="w-8 lg:w-[50px] cursor-pointer" />
+          <Image src={manicon1} alt="icon" className="w-8 lg:w-[50px] cursor-pointer" />
+          <Image src={manicon2} alt="icon" className="w-8 lg:w-[50px] cursor-pointer" />
+          <Image src={manicon3} alt="icon" className="w-8 lg:w-[50px] cursor-pointer" />
         </div>
-      </div>
-      {/* sofe ki filter bar  */}
-      <div className='max-w-full bg-[#fbf3f3]'>
-        <div className='max-w-[120rem] mx-auto py-10 px-10'>
-            <div className='flex justify-between items-center space-x-14'>
-                {/* left side  */}
-            <div className='flex space-x-10'>
-                <Image src={filtericon} alt='filter icon'></Image>
-                <p className='text-3xl font-medium'>Filter</p>
-                <Image src={cateicon} alt='filter icon'></Image>
-                <Image src={cateicon1} alt='filter icon' className=''></Image>
-                <div className='border-l-[3px] border-black'>
-                <p className='text-3xl ml-5 font-normal'>Showing 1-16 of 32 results</p>
-                </div>
+      </nav>
+    </div>
+  </div>
+</section>
 
-            </div>
-            {/* right side  */}
-            <div className='flex space-x-10 items-center'>
-                <p className='text-3xl font-normal'>Show</p>
-                <input type="text" className='text-center text-4xl w-[80px] h-[80px]' placeholder='16' />
-                <p className='text-3xl font-normal'>Short by</p>
-                <input type="text" className='text-center text-4xl w-[240px] h-[80px]' placeholder='Default' />
-            </div>
-            </div>
+{/* Shop Hero Section */}
+<div className="max-w-full relative">
+  <Image
+    src={shopbg}
+    alt="bg pic instagram"
+    className="w-full h-[400px] lg:h-[700px] object-cover opacity-25"
+  />
+  <div className="max-w-7xl mx-auto py-6 px-6 lg:px-10">
+    <div className="flex justify-center items-center absolute inset-0">
+      <div className="text-center">
+        <div className="flex justify-center items-center">
+          <Image src={shopicon} alt="shop icon" className="w-16 lg:w-[100px]" />
+        </div>
+        <h1 className="text-3xl lg:text-6xl font-medium">Cart</h1>
+        <p className="text-sm lg:text-xl font-semibold py-3 lg:py-5">
+          <span className="font-bold">Home</span> &gt; Cart
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+{/* Sofe ki filter bar */}
+<div className='max-w-full bg-[#fbf3f3]'>
+  <div className='max-w-[120rem] mx-auto py-10 px-4 sm:px-8'>
+    <div className='flex flex-col sm:flex-row justify-between items-center space-y-6 sm:space-y-0 sm:space-x-14'>
+      {/* Left side */}
+      <div className='flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-6'>
+        <div className='flex items-center space-x-2'>
+          <Image src={filtericon} alt='filter icon' className='w-8 h-8' />
+          <p className='text-2xl sm:text-3xl font-medium'>Filter</p>
+        </div>
+        <div className='flex space-x-4'>
+          <Image src={cateicon} alt='category icon' className='w-8 h-8' />
+          <Image src={cateicon1} alt='category icon' className='w-8 h-8' />
+        </div>
+        <div className='border-l-[3px] border-black pl-4'>
+          <p className='text-sm sm:text-lg font-normal'>
+            Showing 1-16 of 32 results
+          </p>
         </div>
       </div>
+      {/* Right side */}
+      <div className='flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-6'>
+        <p className='text-xl sm:text-2xl font-normal'>Show</p>
+        <input
+          type="text"
+          className='text-center text-xl sm:text-3xl w-[80px] sm:w-[100px] h-[40px] sm:h-[50px]'
+          placeholder='16'
+        />
+        <p className='text-xl sm:text-2xl font-normal'>Sort by</p>
+        <input
+          type="text"
+          className='text-center text-xl sm:text-3xl w-[120px] sm:w-[180px] h-[40px] sm:h-[50px]'
+          placeholder='Default'
+        />
+      </div>
+    </div>
+  </div>
+</div>
+
+
       {/* shop cards all  */}
       <div className='max-w-full'>
       <div className='max-w-7xl mx-auto py-10'>
