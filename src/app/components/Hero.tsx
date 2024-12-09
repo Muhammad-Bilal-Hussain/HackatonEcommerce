@@ -26,70 +26,85 @@ function Hero() {
   return (
     <div>
       {/* hero div  */}
-      <div className='max-w-full bg-[#f6e6b8]'>
-        <div className='max-w-7xl mx-auto py-10 px-10'>
-        <>
-  <nav className="flex justify-between items-center px-8 py-4 ">
-    {/* Left Menu */}
-    <div>
-      {/* <h1 className="text-xl font-bold text-gray-800">Brand</h1> */}
-    </div>
-    {/* Navigation Links */}
-    <ul className="flex space-x-6 text-gray-700">
-      <li>
-        <a href="#" className="text-lg font-bold hover:text-black">
-          Home
-        </a>
-      </li>
-      <li>
-        <Link href={"/shop"} className="hover:text-black text-lg font-bold">
-          Shop</Link>
-      </li>
-      <li>
-        <a href="#" className="hover:text-black text-lg font-bold">
-          About
-        </a>
-      </li>
-      <li>
-        <a href="/contct" className="hover:text-black text-lg font-bold">
-          Contact
-        </a>
-      </li>
-    </ul>
-    {/* Icons */}
-    <div className="flex space-x-10 text-gray-700">
-      <span className="material-icons"><Image src={manicon} alt='icon' className='w-[55px] cursor-pointer'></Image></span>
-      <span className="material-icons "><Image src={manicon1} alt='icon' className='w-[55px] cursor-pointer'></Image></span>
-      <span className="material-icons"><Image src={manicon2} alt='icon' className='w-[55px] cursor-pointer'></Image></span>
-      <span className="material-icons"><Image src={manicon3} alt='icon' className='w-[55px] cursor-pointer'></Image></span>
-    </div>
-  </nav>
-  {/* Hero Section */}
-  <section className="flex flex-col md:flex-row items-center justify-between px-8 py-20 max-w-screen-xl mx-auto">
-    {/* Text Content */}
-    <div className="space-y-4">
-      <h1 className="text-7xl font-bold text-gray-800 leading-tight">
-        Rocket single <br /> seater
-      </h1>
-      <a
-        href="#"
-        className="inline-block text-2xl font-medium text-gray-800 underline hover:text-black">
-        Shop Now
-      </a>
-    </div>
-    {/* Image */}
-    <div className="mt-10 md:mt-0">
-      <Image
-        src={herosofa}
-        alt="Rocket single seater"
-        className="w-full max-w-md rounded-lg"
-      ></Image>
-    </div>
-  </section>
-</>
-
+      <div className="max-w-full bg-[#f6e6b8]">
+  <div className="max-w-7xl mx-auto py-10 px-6">
+    <>
+      {/* Navbar */}
+      <nav className="flex flex-wrap justify-between items-center px-4 py-4">
+        {/* Navigation Links */}
+        <ul className="flex flex-wrap space-x-6 text-gray-700">
+          <li>
+            <a href="#" className="text-lg font-bold hover:text-black">
+              Home
+            </a>
+          </li>
+          <li>
+            <Link href={"/shop"} className="hover:text-black text-lg font-bold">
+              Shop
+            </Link>
+          </li>
+          <li>
+            <a href="#" className="hover:text-black text-lg font-bold">
+              About
+            </a>
+          </li>
+          <li>
+            <a href="/contact" className="hover:text-black text-lg font-bold">
+              Contact
+            </a>
+          </li>
+        </ul>
+        {/* Icons */}
+        <div className="flex flex-wrap space-x-4 text-gray-700 mt-4 sm:mt-0">
+          <Image
+            src={manicon}
+            alt="icon"
+            className="w-10 h-10 cursor-pointer"
+          />
+          <Image
+            src={manicon1}
+            alt="icon"
+            className="w-10 h-10 cursor-pointer"
+          />
+          <Image
+            src={manicon2}
+            alt="icon"
+            className="w-10 h-10 cursor-pointer"
+          />
+          <Image
+            src={manicon3}
+            alt="icon"
+            className="w-10 h-10 cursor-pointer"
+          />
         </div>
-      </div>
+      </nav>
+
+      {/* Hero Section */}
+      <section className="flex flex-col md:flex-row items-center justify-between px-4 py-10">
+        {/* Text Content */}
+        <div className="text-center md:text-left space-y-4 mb-6 md:mb-0">
+          <h1 className="text-4xl md:text-6xl font-bold text-gray-800 leading-tight">
+            Rocket Single <br /> Seater
+          </h1>
+          <a
+            href="#"
+            className="inline-block text-xl md:text-2xl font-medium text-gray-800 underline hover:text-black"
+          >
+            Shop Now
+          </a>
+        </div>
+        {/* Image */}
+        <div className="mt-6 md:mt-0">
+          <Image
+            src={herosofa}
+            alt="Rocket Single Seater"
+            className="w-full max-w-xs md:max-w-md rounded-lg"
+          />
+        </div>
+      </section>
+    </>
+  </div>
+</div>
       {/* side table div  */}
       <div className='max-w-full bg-[#fbf3f3]'>
         <div className='max-w-7xl mx-auto py-10 px-10'>
@@ -197,22 +212,27 @@ function Hero() {
         </div>
       </div>
       {/* new arrival  */}
-      <div className='max-w-full bg-[#f9edd3]'>
-        <div className='max-w-7xl mx-auto py-10 px-10'>
-        <div className='flex justify-between items-center'>
-          <div>
-            <Image src={newarrival} alt='new arrival sofa'></Image>
-          </div>
-          <div className='flex items-center justify-center'>
-            <div className='text-center'>
-            <h2 className='text-2xl font-bold'>New Arrivals</h2>
-            <h1 className='text-5xl font-bold '>Asgaard sofa</h1>
-            <button className='bg-[#f9edd3] text-black border border-black text-center text-[25px] w-[200px] h-[50px] mt-10'>Order Now</button>
-            </div>
-          </div>
-        </div>
+      <div className="max-w-full bg-[#f9edd3]">
+  <div className="max-w-7xl mx-auto py-10 px-5">
+    {/* Main Flex Container */}
+    <div className="flex flex-col lg:flex-row justify-between items-center space-y-10 lg:space-y-0">
+      {/* Image Section */}
+      <div className="w-full lg:w-1/2 flex justify-center lg:justify-start">
+        <Image src={newarrival} alt="new arrival sofa" className="w-full max-w-md lg:max-w-full" />
+      </div>
+      {/* Text Section */}
+      <div className="w-full lg:w-1/2 flex items-center justify-center">
+        <div className="text-center lg:text-left">
+          <h2 className="text-xl md:text-2xl font-bold">New Arrivals</h2>
+          <h1 className="text-3xl md:text-5xl font-bold mt-2">Asgaard Sofa</h1>
+          <button className="bg-[#f9edd3] text-black border border-black text-center text-lg md:text-[25px] w-[150px] md:w-[200px] h-[40px] md:h-[50px] mt-6">
+            Order Now
+          </button>
         </div>
       </div>
+    </div>
+  </div>
+</div>
       {/* card div 2  */}
       <div className='max-w-full'>
         <div className='max-w-7xl mx-auto py-10 px-10'>
