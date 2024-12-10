@@ -34,7 +34,8 @@ import Link from 'next/link';
 function Shop() {
   return (
     <div>
-<section>
+      {/* navbar  */}
+    <section>
   <div className="max-w-full bg-[#ffffff]">
     <div className="max-w-7xl mx-auto py-6 px-6 lg:px-10">
       <nav className="flex flex-wrap justify-between items-center px-4 py-3">
@@ -71,7 +72,7 @@ function Shop() {
       </nav>
     </div>
   </div>
-</section>
+    </section>
 
 {/* Shop Hero Section */}
 <div className="max-w-full relative">
