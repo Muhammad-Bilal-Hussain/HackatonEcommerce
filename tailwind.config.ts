@@ -13,6 +13,16 @@ const config: Config = {
         foreground: "var(--foreground)",
       },
     },
+    screens:{
+      // MIN_WIDTH
+      "max-sm": { 'max': '480px' },
+      "sm": "481px",
+      "md":  "640px",
+      "lg": "780px",
+      "xl": "892px",
+      "2xl": "1028px",
+      "3xl": "1248px"
+      }
   },
   plugins: [],
 };
