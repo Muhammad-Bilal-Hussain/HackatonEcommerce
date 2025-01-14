@@ -5,16 +5,16 @@ import { urlForImage } from "@/sanity/lib/image";
 import Header from "../components/Header";
 import shopbg from "../../../public/shopbg.jpeg"
 import shopicon from "../../../public/shopicon.png"
-import sofa4 from "../../../public/sofa4.jpg"
+import Link from "next/link";
 
 export default function Cart() {
-  const { cart } = useCart();
+  const { cart, removeFromCart } = useCart();
 
   if (cart.length === 0) {
     return <div className="text-center">Your cart is empty.</div>;
   }
 
-  const subtotal = cart.reduce((acc:any, item:any) => acc + item.price * item.quantity, 0);
+  const subtotal = cart.reduce((acc: number, item: { price: number; quantity: number; }) => acc + item.price * item.quantity, 0);
                
   return (
     <div>
@@ -46,8 +46,8 @@ export default function Cart() {
 {/* Product Cart */}
 <div className="max-w-full">
   <div className="max-w-7xl mx-auto py-10 px-4 sm:px-6 lg:px-10">
-    {cart.map((item:any) => (
-    <div key={item.slug}>
+    {cart.map((item:any, index:number) => (
+    <div key={index}>
   {/* Product Cart */}
 <div className="max-w-full">
   <div className="max-w-7xl mx-auto py-10 px-4 sm:px-6 lg:px-10">
@@ -73,6 +73,13 @@ export default function Cart() {
           </div>
           <p className="text-sm text-black text-center sm:text-lg">Rs. {item.price * item.quantity}.00</p>
         </div>
+                        {/* Delete Button */}
+                        <button
+                  onClick={() => removeFromCart(item.slug)}
+                  className="text-red-500 border border-red-500 px-4 py-1 rounded"
+                >
+                  Delete
+                </button>
       </div>
 
       {/* Cart Total Section */}
@@ -81,14 +88,14 @@ export default function Cart() {
           <h1 className="text-2xl font-semibold sm:text-3xl">Cart Total</h1>
           <div className="flex justify-around items-center py-4 border-b">
             <p className="text-sm sm:text-base">Subtotal</p>
-            <p className="text-sm text-gray-400 sm:text-base">Rs. {subtotal}.00</p>
+            <p className="text-sm text-gray-400 sm:text-base">Rs. {item.price}.00</p>
           </div>
           <div className="flex justify-around items-center py-4">
             <p className="text-sm sm:text-base">Total</p>
-            <p className="text-yellow-500 text-sm sm:text-base">Rs. {}.00</p>
+            <p className="text-yellow-500 text-sm sm:text-base">Rs. {item.price * item.quantity}.00</p>
           </div>
           <button className="mt-4 bg-[#fbf3f3] font-normal text-black border-2 border-gray-400 rounded-xl w-full sm:w-[150px] h-[45px]">
-            Check Out
+           <Link href={"/checkout"}>Check Out</Link>
           </button>
         </div>
       </div>
@@ -96,7 +103,8 @@ export default function Cart() {
   </div>
 </div>
   </div>
-  ))}
+  )
+  )}
   </div>
 </div>
       {/* free delivery line  */}

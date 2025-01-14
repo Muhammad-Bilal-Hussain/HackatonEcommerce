@@ -13,6 +13,7 @@ export default function Page({ params: { slug } }: { params: { slug: string } })
     const [data, setData] = useState<any>(null);
     const [count, setCount] = useState<number>(1); // Explicitly typed state
     const { addToCart } = useCart(); // Access Cart Context
+    const [activeTab, setActiveTab] = useState("description"); // State to manage active tab
 
     useEffect(() => {
         const fetchData = async () => {
@@ -96,8 +97,9 @@ export default function Page({ params: { slug } }: { params: { slug: string } })
           <span className="px-4 py-2">{count}</span>
           <button className="px-3 py-2 text-gray-500 hover:bg-yellow-100 hover:text-yellow-700" onClick={handleIncrement}>+</button>
         </div>
-        <button className="px-6 py-3 rounded-lg border border-gray-500 hover:bg-yellow-100 hover:text-yellow-700 hover:border-yellow-700" onClick={() => addToCart(data, count)}>
-          Add To Cart
+        <button className="px-6 py-3 rounded-lg border border-gray-500 hover:bg-yellow-100 hover:text-yellow-700 hover:border-yellow-700"
+         onClick={() => addToCart(data, count)}>
+           <Link href={"/cart"}>Add To Cart</Link>
         </button> 
       </div>
       {/* total amount  */}
@@ -120,22 +122,87 @@ export default function Page({ params: { slug } }: { params: { slug: string } })
       </div>
         </div>
         </div>
-        <div className='border-t-2 border-gray-400'>
-        <div className='flex mt-5'>
-            <div className='space-y-5'>
-                <div className='space-x-5 flex text-xl justify-center items-center'>
-                <p className='text-gray-800'>Description </p>
-                <p className='text-gray-400'>Additional Information </p>
-                <p className='text-gray-400'>Reviews [5]</p>
-                </div>
-                {/* discription line  */}
-                <div className='space-y-5'>
-                <p className='text-gray-400 '>Embodying the raw, wayward spirit of rock ‘n’ roll, the Kilburn portable active stereo speaker takes the unmistakable look and sound of Marshall, unplugs the chords, and takes the show on the road.</p>
-                <p className='text-gray-400 '>Weighing in under 7 pounds, the Kilburn is a lightweight piece of vintage styled engineering. Setting the bar as one of the loudest speakers in its class, the Kilburn is a compact, stout-hearted hero with a well-balanced audio which boasts a clear midrange and extended highs for a sound that is both articulate and pronounced. The analogue knobs allow you to fine tune the controls to your personal preferences while the guitar-influenced leather strap enables easy and stylish travel.</p>
-                </div>
-            </div>
+        {/* description row  */}
+        <div className="border-t-2 border-gray-400">
+      {/* Tabs */}
+      <div className="flex mt-5">
+        <div className="space-y-5">
+          <div className="space-x-5 flex text-xl justify-center items-center">
+            <button
+              className={`${
+                activeTab === "description" ? "text-gray-800" : "text-gray-400"
+              } hover:text-gray-800`}
+              onClick={() => setActiveTab("description")}
+            >
+              Description
+            </button>
+            <button
+              className={`${
+                activeTab === "additionalInfo" ? "text-gray-800" : "text-gray-400"
+              } hover:text-gray-800`}
+              onClick={() => setActiveTab("additionalInfo")}
+            >
+              Additional Information
+            </button>
+            <button
+              className={`${
+                activeTab === "reviews" ? "text-gray-800" : "text-gray-400"
+              } hover:text-gray-800`}
+              onClick={() => setActiveTab("reviews")}
+            >
+              Reviews [5]
+            </button>
+          </div>
+
+          {/* Dynamic Content */}
+          <div className="space-y-5">
+            {activeTab === "description" && (
+              <div>
+                <p className="text-gray-400">
+                  Embodying the raw, wayward spirit of rock ‘n’ roll, the Kilburn
+                  portable active stereo speaker takes the unmistakable look and
+                  sound of Marshall, unplugs the chords, and takes the show on the
+                  road.
+                </p>
+                <p className="text-gray-400">
+                  Weighing in under 7 pounds, the Kilburn is a lightweight piece of
+                  vintage styled engineering. Setting the bar as one of the loudest
+                  speakers in its class, the Kilburn is a compact, stout-hearted
+                  hero with a well-balanced audio which boasts a clear midrange and
+                  extended highs for a sound that is both articulate and pronounced.
+                  The analogue knobs allow you to fine tune the controls to your
+                  personal preferences while the guitar-influenced leather strap
+                  enables easy and stylish travel.
+                </p>
+              </div>
+            )}
+            {activeTab === "additionalInfo" && (
+              <div>
+                <p className="text-gray-400">Weight: 3.0 kg</p>
+                <p className="text-gray-400">Dimensions: 30 cm x 15 cm x 20 cm</p>
+                <p className="text-gray-400">Color: Black</p>
+                <p className="text-gray-400">Power Output: 25 Watts</p>
+              </div>
+            )}
+            {activeTab === "reviews" && (
+              <div>
+                <p className="text-gray-400">
+                  1. Great product! The sound quality is amazing. - John Doe
+                </p>
+                <p className="text-gray-400">
+                  2. Very portable and stylish. - Jane Smith
+                </p>
+                <p className="text-gray-400">3. Worth every penny. - Alice</p>
+                <p className="text-gray-400">4. The bass is outstanding. - Bob</p>
+                <p className="text-gray-400">
+                  5. Perfect for outdoor use! - Chris
+                </p>
+              </div>
+            )}
+          </div>
         </div>
       </div>
+    </div>
     </div>
   </div>
     </div>

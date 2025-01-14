@@ -13,21 +13,28 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   const addToCart = (product: any, quantity: number) => {
     setCart((prev) => {
       const existingProduct = prev.find((item) => item.slug === product.slug);
+
       if (existingProduct) {
-        // Update Quantity if Product Exists
+        // Update quantity if product already exists in cart
         return prev.map((item) =>
           item.slug === product.slug
-            ? { ...item, quantity: item.quantity + quantity }
+            ? { ...item, quantity: item.quantity }
             : item
         );
       }
-      // Add New Product
+
+      // Add new product to cart
       return [...prev, { ...product, quantity }];
     });
   };
 
+  // Remove From Cart Function
+  const removeFromCart = (slug: string) => {
+    setCart((prev) => prev.filter((item) => item.slug !== slug));
+  };
+
   return (
-    <CartContext.Provider value={{ cart, addToCart }}>
+    <CartContext.Provider value={{ cart, addToCart, removeFromCart }}>
       {children}
     </CartContext.Provider>
   );

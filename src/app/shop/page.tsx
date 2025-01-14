@@ -72,13 +72,13 @@ export default async function page() {
                   <p className='text-xl sm:text-2xl font-normal'>Show</p>
                   <input
                     type="text"
-                    className='text-center text-xl sm:text-3xl w-[80px] sm:w-[100px] h-[40px] sm:h-[50px]'
+                    className='text-center text-xl sm:text-xl w-[80px] sm:w-[100px] h-[40px] sm:h-[50px]'
                     placeholder='16'
                   />
                   <p className='text-xl sm:text-2xl font-normal'>Sort by</p>
                   <input
                     type="text"
-                    className='text-center text-xl sm:text-3xl w-[120px] sm:w-[180px] h-[40px] sm:h-[50px]'
+                    className='text-center text-xl sm:text-xl w-[120px] sm:w-[180px] h-[40px] sm:h-[50px]'
                     placeholder='Default'
                   />
                 </div>
