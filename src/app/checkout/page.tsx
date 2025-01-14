@@ -75,9 +75,9 @@ function page() {
         <div className="flex justify-center items-center">
           <Image src={shopicon} alt="shop icon" className="w-16 lg:w-[100px]" />
         </div>
-        <h1 className="text-3xl lg:text-6xl font-medium">Cart</h1>
+        <h1 className="text-3xl lg:text-6xl font-medium">CheckOut</h1>
         <p className="text-sm lg:text-xl font-semibold py-3 lg:py-5">
-          <span className="font-bold">Home</span> &gt; Cart
+          <span className="font-bold">Home</span> &gt; CheckOut
         </p>
       </div>
     </div>
@@ -119,7 +119,7 @@ function page() {
                             <option value="india">India</option>
                             <option value="bangladesh">Bangladesh</option>
                         </select>
-                        <div className="absolute inset-y-0 right-5 flex items-center pr-4 pointer-events-none">
+                        <div className="absolute inset-y-0 left-[70%] flex items-center pr-4 pointer-events-none">
                             <FontAwesomeIcon icon={faAngleDown} />
                         </div>
                     </div>
@@ -155,15 +155,15 @@ function page() {
     <div className='space-x-0 sm:space-x-20 flex flex-col sm:flex-row justify-between items-start sm:items-center w-full'>
       <div className='space-y-5'>
         <h1 className='text-lg font-medium'>Product</h1>
-        <p className='text-lg'><span className='text-gray-400'>{item.title}</span> x 1</p>
+        <p className='text-lg'><span className='text-gray-400'>{item.title}</span> * {item.quantity}</p>
         <p className='text-lg'>Subtotal</p>
         <p className='text-lg'>Total</p>
       </div>
       <div className='text-left sm:text-right space-y-5 w-full sm:w-auto'>
         <p className='text-lg font-medium'>Subtotal</p>
-        <p className='text-lg font-medium'>250,000.00</p>
-        <p className='text-lg font-medium'>250,000.00</p>
-        <p className='text-2xl font-medium text-yellow-600'>Rs.250,000.00</p>
+        <p className='text-lg font-medium'>{item.price * item.quantity}.00</p>
+        <p className='text-lg font-medium'>{item.price}.00</p>
+        <p className='text-2xl font-medium text-yellow-600'>{item.price * item.quantity}.00</p>
       </div>
     </div>
   </div>
