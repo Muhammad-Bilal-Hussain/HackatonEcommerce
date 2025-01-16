@@ -1,26 +1,21 @@
 "use client";
 import React from 'react'
 import Image from "next/image";
-import manicon from "../../../public/manicon.png"
-import manicon1 from "../../../public/searchicon.png"
-import manicon2 from "../../../public/heart icon.png"
-import manicon3 from "../../../public/carticon.png"
 import shopbg from "../../../public/shopbg.jpeg"
 import shopicon from "../../../public/shopicon.png"
-import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown, faArrowDown } from '@fortawesome/free-solid-svg-icons';
 import { useCart } from '../context/CartContext';
 import Header from '../components/Header';
 
-function page() {
-    const { cart, removeFromCart } = useCart();
+export default function Page() {
+    const { cart } = useCart();
 
   if (cart.length === 0) {
     return <div className="text-center">Your cart is empty.</div>;
-  }
-
+  };
   const subtotal = cart.reduce((acc: number, item: { price: number; quantity: number; }) => acc + item.price * item.quantity, 0);
+
   return (
     <div>
         {/* navbar  */}
@@ -48,8 +43,9 @@ function page() {
   </div>
 </div>
 
-
-    {cart.map((item:any, index:number)=> (
+{/* billing section  */}
+<div>
+{cart.map((item:any, index:number)=> (
       <div key={index}>
               {/* Blings details left side  */}
       <div className='max-w-full'>
@@ -129,7 +125,7 @@ function page() {
         <p className='text-lg font-medium'>Subtotal</p>
         <p className='text-lg font-medium'>{item.price * item.quantity}.00</p>
         <p className='text-lg font-medium'>{item.price}.00</p>
-        <p className='text-2xl font-medium text-yellow-600'>{item.price * item.quantity}.00</p>
+        <p className='text-2xl font-medium text-yellow-600'>{subtotal}.00</p>
       </div>
     </div>
   </div>
@@ -162,8 +158,7 @@ function page() {
       </div>
       </div>
     ))}
+</div>
     </div>
   )
 }
-
-export default page
