@@ -69,11 +69,13 @@ const Header=()=>{
                             alt="icon"
                             className="w-6 md:w-8 h-6 md:h-8 cursor-pointer"
                           />
-                          <Image
+                          <a href="/blogs">
+                           <Image
                             src={manicon2}
                             alt="icon"
                             className="w-6 md:w-8 h-6 md:h-8 cursor-pointer"
                           />
+                          </a>
                           <a href="/cart">
                             <Image
                               src={manicon3}
