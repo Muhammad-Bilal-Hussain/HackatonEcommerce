@@ -23,8 +23,15 @@ import sofa11 from "../../../public/sofa11.jpg"
 import sofa12 from "../../../public/sofa12.jpg"
 import sofa13 from "../../../public/sofa13.jpg"
 import Link from 'next/link';
+import { client } from '@/sanity/lib/client';
+import ShopProduct from '../components/ShopProduct';
 
-function Shop() {
+export default async function Shop() {
+  const query = `*[_type=='products'] | order(_createAt asc) {
+         title ,image, price,
+        "slug":slug.current,
+          }`
+          const data: productData[] = await client.fetch(query);
   return (
     <div>
       {/* navbar  */}
@@ -133,9 +140,16 @@ function Shop() {
       <div className='max-w-7xl mx-auto py-10'>
         <div className='flex justify-center items-center'>
     {/* Product Grid */}
-    <div className="grid grid-cols-1 grid-rows-4 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-20">
+    <div className="grid grid-cols-1 grid-rows-4 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-20">
     {/* Product Card 1 */}
-    <div className="">
+    {
+      data.map((product:productData) => (
+        <ShopProduct data={product} key={product.slug} />
+      ))
+    }
+
+
+    {/* <div className="">
       <Image
         src={card1sofa}
         alt="Product 1"
@@ -143,170 +157,8 @@ function Shop() {
       />
       <h3 className="text-xl font-light px-10 ">Trenton modular sofa_3</h3>
       <p className="text-gray-600 text-2xl font-bold px-10 mr-10 mt-2">Rs. 25,000.00</p>
-    </div>
-    {/* Product Card 2 */}
-    <div className="">
-    <Image
-        src={card2sofa}
-        alt="Product 1"
-        className="mx-auto mb-4"
-      />
-      <h3 className="text-xl font-light px-10">
-        Granite dining table with dining chair
-      </h3>
-      <p className="text-gray-600 text-2xl font-bold px-10 mr-10 mt-2">Rs. 25,000.00</p>
-    </div>
-    {/* Product Card 3 */}
-    <div className="">
-    <Image
-        src={card3sofa}
-        alt="Product 1"
-        className="mx-auto mb-4"
-      />
-      <h3 className="text-xl font-light px-10">Outdoor bar table and stool</h3>
-      <p className="text-gray-600 text-2xl font-bold px-10 mr-10 mt-2 ">Rs. 25,000.00</p>
-    </div>
-    {/* Product Card 4 */}
-    <div className="">
-    <Image
-        src={card4sofa}
-        alt="Product 1"
-        className="mx-auto mb-4"
-      />
-      <h3 className="text-xl font-light px-10 ">Plain console with teak mirror</h3>
-      <p className="text-gray-600 text-2xl font-bold px-10 mr-10 mt-2">Rs. 25,000.00</p>
-    </div>
-
-    {/* 2nd row  */}
-    {/* Product Card 1 */}
-    <div className="">
-      <Image
-        src={sofa1}
-        alt="Product 1"
-        className="mx-auto mb-4"
-      />
-      <h3 className="text-xl font-light px-10 ">Trenton modular sofa_3</h3>
-      <p className="text-gray-600 text-2xl font-bold px-10 mr-10 mt-2">Rs. 25,000.00</p>
-    </div>
-    {/* Product Card 2 */}
-    <div className="">
-    <Image
-        src={sofa2}
-        alt="Product 1"
-        className="mx-auto mb-4"
-      />
-      <h3 className="text-xl font-light px-10">
-        Granite dining table with dining chair
-      </h3>
-      <p className="text-gray-600 text-2xl font-bold px-10 mr-10 mt-2">Rs. 25,000.00</p>
-    </div>
-    {/* Product Card 3 */}
-    <div className="">
-    <Image
-        src={sofa3}
-        alt="Product 1"
-        className="mx-auto mb-4"
-      />
-      <h3 className="text-xl font-light px-10">Outdoor bar table and stool</h3>
-      <p className="text-gray-600 text-2xl font-bold px-10 mr-10 mt-2 ">Rs. 25,000.00</p>
-    </div>
-    {/* Product Card 4 */}
-    <div className="">
-    <Image
-        src={sofa4}
-        alt="Product 1"
-        className="mx-auto mb-4"
-      />
-      <h3 className="text-xl font-light px-10 ">Plain console with teak mirror</h3>
-      <p className="text-gray-600 text-2xl font-bold px-10 mr-10 mt-2">Rs. 25,000.00</p>
-    </div>
-
-    {/* 3 row  */}
-    {/* Product card 1 */}
-    <div className="">
-      <Image
-        src={sofa5}
-        alt="Product 1"
-        className="mx-auto mb-4"
-      />
-      <h3 className="text-xl font-light px-10 ">Trenton modular sofa_3</h3>
-      <p className="text-gray-600 text-2xl font-bold px-10 mr-10 mt-2">Rs. 25,000.00</p>
-    </div>
-    {/* Product Card 2 */}
-    <div className="">
-    <Image
-        src={sofa6}
-        alt="Product 1"
-        className="mx-auto mb-4"
-      />
-      <h3 className="text-xl font-light px-10">
-        Granite dining table with dining chair
-      </h3>
-      <p className="text-gray-600 text-2xl font-bold px-10 mr-10 mt-2">Rs. 25,000.00</p>
-    </div>
-    {/* Product Card 3 */}
-    <div className="">
-    <Image
-        src={sofa7}
-        alt="Product 1"
-        className="mx-auto mb-4"
-      />
-      <h3 className="text-xl font-light px-10">Outdoor bar table and stool</h3>
-      <p className="text-gray-600 text-2xl font-bold px-10 mr-10 mt-2 ">Rs. 25,000.00</p>
-    </div>
-    {/* Product Card 4 */}
-    <div className="">
-    <Image
-        src={sofa8}
-        alt="Product 1"
-        className="mx-auto mb-4"
-      />
-      <h3 className="text-xl font-light px-10 ">Plain console with teak mirror</h3>
-      <p className="text-gray-600 text-2xl font-bold px-10 mr-10 mt-2">Rs. 25,000.00</p>
-    </div>
-    {/* 4th row */}
-        {/* Product card 1 */}
-    <div className="">
-      <Image
-        src={sofa9}
-        alt="Product 1"
-        className="mx-auto mb-4"
-      />
-      <h3 className="text-xl font-light px-10 ">Trenton modular sofa_3</h3>
-      <p className="text-gray-600 text-2xl font-bold px-10 mr-10 mt-2">Rs. 25,000.00</p>
-    </div>
-    {/* Product Card 2 */}
-    <div className="">
-    <Image
-        src={sofa10}
-        alt="Product 1"
-        className="mx-auto mb-4"
-      />
-      <h3 className="text-xl font-light px-10">
-        Granite dining table with dining chair
-      </h3>
-      <p className="text-gray-600 text-2xl font-bold px-10 mr-10 mt-2">Rs. 25,000.00</p>
-    </div>
-    {/* Product Card 3 */}
-    <div className="">
-    <Image
-        src={sofa11}
-        alt="Product 1"
-        className="mx-auto mb-4"
-      />
-      <h3 className="text-xl font-light px-10">Outdoor bar table and stool</h3>
-      <p className="text-gray-600 text-2xl font-bold px-10 mr-10 mt-2 ">Rs. 25,000.00</p>
-    </div>
-    {/* Product Card 4 */}
-    <div className="">
-    <Image
-        src={sofa13}
-        alt="Product 1"
-        className="mx-auto mb-4"
-      />
-      <h3 className="text-xl font-light px-10 ">Plain console with teak mirror</h3>
-      <p className="text-gray-600 text-2xl font-bold px-10 mr-10 mt-2">Rs. 25,000.00</p>
-    </div>
+    </div> */}
+  
     </div>
         </div>
         <div className='flex justify-center items-center space-x-10 '>
@@ -429,5 +281,3 @@ function Shop() {
     </div>
   )
 }
-
-export default Shop

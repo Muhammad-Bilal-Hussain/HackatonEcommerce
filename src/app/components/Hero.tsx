@@ -20,6 +20,7 @@ import newarrival from "../../../public/new arival sofa.jpg"
 import watchicon from "../../../public/watchicon.jpg"
 import calndericon from "../../../public/calendericon.jpg"
 import bgpic from "../../../public/intagrambg pic.jpg"
+import Footer from "../components/Footer"
 import Link from 'next/link'
 
 
@@ -34,7 +35,7 @@ const Hero=()=> {
     <div>
 {/* Hero Div */}
 <div className="max-w-full bg-[#f6e6b8]">
-  <div className="max-w-[1440px] min-h-screen flex flex-col items-center mx-auto px-4 md:px-10">
+  <div className="max-w-[1440px] flex flex-col items-center mx-auto px-4 md:px-10">
 {/* Navbar */}
 <nav className="w-full bg-[#f6e6b8] px-4 py-4">
   <div className="max-w-[1440px] mx-auto flex justify-between items-center">
@@ -349,6 +350,9 @@ const Hero=()=> {
           </div>
         </div>
       </div>
+
+      {/* Footer  */}
+      <Footer/>
     </div>
   )
 }
