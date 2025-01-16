@@ -231,7 +231,7 @@ const Hero=()=> {
   </div>
   {/* View More Button */}
   <div className="text-center mt-8">
-    <a href="#" className="text-black underline text-lg font-medium">
+    <a href="/shop" className="text-black underline text-lg font-medium">
       View More
     </a>
   </div>

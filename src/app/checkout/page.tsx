@@ -1,3 +1,4 @@
+"use client";
 import React from 'react'
 import Image from "next/image";
 import manicon from "../../../public/manicon.png"
@@ -9,8 +10,16 @@ import shopicon from "../../../public/shopicon.png"
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown, faArrowDown } from '@fortawesome/free-solid-svg-icons';
+import { useCart } from '../context/CartContext';
 
 function page() {
+    const { cart, removeFromCart } = useCart();
+
+  if (cart.length === 0) {
+    return <div className="text-center">Your cart is empty.</div>;
+  }
+
+  const subtotal = cart.reduce((acc: number, item: { price: number; quantity: number; }) => acc + item.price * item.quantity, 0);
   return (
     <div>
         {/* navbar  */}
@@ -66,16 +75,17 @@ function page() {
         <div className="flex justify-center items-center">
           <Image src={shopicon} alt="shop icon" className="w-16 lg:w-[100px]" />
         </div>
-        <h1 className="text-3xl lg:text-6xl font-medium">Cart</h1>
+        <h1 className="text-3xl lg:text-6xl font-medium">CheckOut</h1>
         <p className="text-sm lg:text-xl font-semibold py-3 lg:py-5">
-          <span className="font-bold">Home</span> &gt; Cart
+          <span className="font-bold">Home</span> &gt; CheckOut
         </p>
       </div>
     </div>
   </div>
 </div>
-
-      {/* Blings details left side  */}
+    {cart.map((item:any, index:number)=> (
+      <div key={index}>
+              {/* Blings details left side  */}
       <div className='max-w-full'>
         <div className='max-w-7xl mx-auto py-10 px-5 sm:px-8 md:px-10'>
             <div className='flex flex-col lg:flex-row justify-between items-start'>
@@ -109,7 +119,7 @@ function page() {
                             <option value="india">India</option>
                             <option value="bangladesh">Bangladesh</option>
                         </select>
-                        <div className="absolute inset-y-0 right-5 flex items-center pr-4 pointer-events-none">
+                        <div className="absolute inset-y-0 left-[70%] flex items-center pr-4 pointer-events-none">
                             <FontAwesomeIcon icon={faAngleDown} />
                         </div>
                     </div>
@@ -145,15 +155,15 @@ function page() {
     <div className='space-x-0 sm:space-x-20 flex flex-col sm:flex-row justify-between items-start sm:items-center w-full'>
       <div className='space-y-5'>
         <h1 className='text-lg font-medium'>Product</h1>
-        <p className='text-lg'><span className='text-gray-400'>Asgaard sofa</span> x 1</p>
+        <p className='text-lg'><span className='text-gray-400'>{item.title}</span> * {item.quantity}</p>
         <p className='text-lg'>Subtotal</p>
         <p className='text-lg'>Total</p>
       </div>
       <div className='text-left sm:text-right space-y-5 w-full sm:w-auto'>
         <p className='text-lg font-medium'>Subtotal</p>
-        <p className='text-lg font-medium'>250,000.00</p>
-        <p className='text-lg font-medium'>250,000.00</p>
-        <p className='text-2xl font-medium text-yellow-600'>Rs.250,000.00</p>
+        <p className='text-lg font-medium'>{item.price * item.quantity}.00</p>
+        <p className='text-lg font-medium'>{item.price}.00</p>
+        <p className='text-2xl font-medium text-yellow-600'>{item.price * item.quantity}.00</p>
       </div>
     </div>
   </div>
@@ -184,93 +194,8 @@ function page() {
           </div>
         </div>
       </div>
-        {/* Footer  */}
-      <div className='max-w-full'>
-        <div className='max-w-7xl mx-auto py-10 px-10'>
-        <footer className="text-gray-600 body-font">
-  <div className="container px-5 py-24 mx-auto">
-    <div className="flex flex-wrap md:text-left text-center order-first">
-      {/* 1st row  */}
-      <div className="lg:w-[25%] md:w-1/2 w-full px-4 flex justify-center items-center space-x-5">
-        <h2 className="font-medium text-gray-400 tracking-widest text-xl mb-3">
-          400 University Drive Suite 200 Coral Gables,<br /> FL 33134 USA
-        </h2>
       </div>
-      {/* 2 row  */}
-      <div className="lg:w-1/4 md:w-1/2 w-full px-10">
-        <h2 className="title-font font-medium text-gray-400 tracking-widest text-2xl mb-3">
-          Links
-        </h2>
-        <nav className="list-none mb-10 space-y-5">
-          <li>
-            <a className="text-black text-2xl">Home</a>
-          </li>
-          <li>
-            <a className="text-black text-2xl">Shop</a>
-          </li>
-          <li>
-            <a className="text-black text-2xl">About</a>
-          </li>
-          <li>
-            <a className="text-black text-2xl">Contact</a>
-          </li>
-        </nav>
-      </div>
-      {/* 3 row  */}
-      <div className="lg:w-1/4 md:w-1/2 w-full px-4">
-        <h2 className="title-font font-medium text-gray-400 tracking-widest text-2xl mb-3">
-          Help
-        </h2>
-        <nav className="list-none mb-10 space-y-5">
-          <li>
-            <a className="text-black text-2xl">Payment Options</a>
-          </li>
-          <li>
-            <a className="text-black text-2xl">Returns</a>
-          </li>
-          <li>
-            <a className="text-black text-2xl">Privacy Policies</a>
-          </li>
-        </nav>
-      </div>
-      {/* 4 row  */}
-      <div className="lg:w-1/4 md:w-1/2 w-full px-4">
-        <h2 className="title-font font-medium text-gray-400 tracking-widest text-2xl mb-3">
-          NewsLetter
-        </h2>
-        <nav className="list-none mb-10 space-y-5">
-        <div className="flex xl:flex-nowrap md:flex-nowrap lg:flex-wrap flex-wrap justify-center items-end md:justify-start">
-          <div className="relative w-[100px] sm:w-auto xl:mr-4 lg:mr-0 sm:mr-4 mr-2">
-            <input
-              type="text"
-              id="footer-field"
-              name="footer-field"
-              className="w-[200px] rounded border-b-2 border-black  text-base py-1 leading-8 focus:outline-none "
-              placeholder='Enter Your Email Address'
-            />
-          </div>
-          <button className="lg:mt-2 xl:mt-0 flex-shrink-0 inline-flex border-b-2 border-black py-2 px-6 focus:outline-none rounded text-[25px]">
-            Button
-          </button>
-        </div>
-        </nav>
-      </div>
-    </div>
-  </div>
-  <div className="">
-    <div className="container px-5 py-6 mx-auto flex items-center sm:flex-row flex-col">
-      <a className="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
-        {/* <span className="ml-3 text-xl">Tailblocks</span> */}
-      </a>
-      <p className="text-xl text-gray-500 sm:ml-6 sm:mt-0 mt-4">
-        2022 Meubel House. All rights reserved
-      </p>
-    </div>
-  </div>
-</footer>
-
-        </div>
-      </div>
+    ))}
     </div>
   )
 }
