@@ -1,4 +1,6 @@
-import React from 'react'
+"use client"
+import React, { useState } from 'react'
+// import React from 'react'
 import Image from "next/image";
 import manicon from "../../../public/manicon.png"
 import manicon1 from "../../../public/searchicon.png"
@@ -29,57 +31,94 @@ import sofa10 from "../../../public/sofa10.jpg"
 import sofa11 from "../../../public/sofa11.jpg"
 import sofa12 from "../../../public/sofa12.jpg"
 import sofa13 from "../../../public/sofa13.jpg"
-import Link from 'next/link';
+import Link from 'next/link'
 
-function Shop() {
+const Shop=()=> {
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    // Function to toggle the menu
+    const toggleMenu = () => {
+      setIsMenuOpen(!isMenuOpen);
+    };
   return (
     <div>
       {/* navbar  */}
-    <section>
-  <div className="max-w-full bg-[#ffffff]">
-    <div className="max-w-7xl mx-auto py-6 px-6 lg:px-10">
-      <nav className="flex flex-wrap justify-between items-center px-4 py-3">
-        {/* Navigation Links */}
-        <ul className="flex flex-wrap justify-center space-x-6 lg:space-x-24 text-gray-700 text-sm lg:text-lg">
-          <li>
-            <Link href={"/"} className="hover:text-black font-bold">
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link href={"/shop"} className="hover:text-black font-bold">
-              Shop
-            </Link>
-          </li>
-          <li>
-            <a href="#" className="hover:text-black font-bold">
-              About
-            </a>
-          </li>
-          <li>
-            <Link href={"/contact"} className="hover:text-black font-bold">
-              Contact
-            </Link>
-          </li>
-        </ul>
-        {/* Icons */}
-        <div className="flex flex-wrap justify-center space-x-4 lg:space-x-10 text-gray-700 mt-4 lg:mt-0">
-          <Image src={manicon} alt="icon" className="w-8 lg:w-[50px] cursor-pointer" />
-          <Image src={manicon1} alt="icon" className="w-8 lg:w-[50px] cursor-pointer" />
-          <Image src={manicon2} alt="icon" className="w-8 lg:w-[50px] cursor-pointer" />
-          <Image src={manicon3} alt="icon" className="w-8 lg:w-[50px] cursor-pointer" />
-        </div>
-      </nav>
+  <nav className="w-full bg-[#ffff] px-4 py-4">
+  <div className="max-w-[1440px] mx-auto flex justify-between items-center px-10">
+    {/* Navigation Links */}
+    <div className="flex items-center">
+      <button
+        className="block md:hidden text-gray-700 text-2xl font-bold focus:outline-none"
+        onClick={toggleMenu}
+      >
+        ☰
+      </button>
+      <ul
+        className={`${
+          isMenuOpen ? "block" : "hidden"
+        } absolute md:static top-16 left-0 w-full md:w-auto md:flex md:bg-transparent space-y-4 md:space-y-0 md:space-x-8 text-center md:text-left px-4 py-6 md:py-0`}
+      >
+        <li>
+          <a href="/" className="text-lg font-semibold hover:text-black">
+            Home
+          </a>
+        </li>
+        <li>
+          <Link
+            href={"/shop"}
+            className="hover:text-black text-lg font-semibold"
+          >
+            Shop
+          </Link>
+        </li>
+        <li>
+          <a href="#" className="hover:text-black text-lg font-semibold">
+            About
+          </a>
+        </li>
+        <li>
+          <a href="/contact" className="hover:text-black text-lg font-semibold">
+            Contact
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    {/* Icons */}
+    <div className="flex items-center space-x-4 md:space-x-10">
+    <a href="/myaccount">
+      <Image
+        src={manicon}
+        alt="icon"
+        className="w-8 md:w-10 h-8 md:h-10 cursor-pointer"
+      />
+      </a>
+      <Image
+        src={manicon1}
+        alt="icon"
+        className="w-8 md:w-10 h-8 md:h-10 cursor-pointer"
+      />
+      <Image
+        src={manicon2}
+        alt="icon"
+        className="w-8 md:w-10 h-8 md:h-10 cursor-pointer"
+      />
+      <a href="/cart">
+      <Image
+        src={manicon3}
+        alt="icon"
+        className="w-8 md:w-10 h-8 md:h-10 cursor-pointer"
+      />
+      </a>
     </div>
   </div>
-    </section>
+  </nav>
 
 {/* Shop Hero Section */}
 <div className="max-w-full relative">
   <Image
     src={shopbg}
     alt="bg pic instagram"
-    className="w-full h-[400px] lg:h-[700px] object-cover opacity-25"
+    className="w-full h-[400px] lg:h-[500px] object-cover opacity-25"
   />
   <div className="max-w-7xl mx-auto py-6 px-6 lg:px-10">
     <div className="flex justify-center items-center absolute inset-0">
@@ -133,8 +172,6 @@ function Shop() {
     </div>
   </div>
 </div>
-
-
       {/* shop cards all  */}
       <div className='max-w-full'>
       <div className='max-w-7xl mx-auto py-10'>
@@ -344,93 +381,6 @@ function Shop() {
               <p className='text-3xl text-gray-400'>100% secure payment, consectetur adipim scing elit</p>
               </div>
           </div>
-        </div>
-      </div>
-        {/* Footer  */}
-      <div className='max-w-full'>
-        <div className='max-w-7xl mx-auto py-10 px-10'>
-        <footer className="text-gray-600 body-font">
-  <div className="container px-5 py-24 mx-auto">
-    <div className="flex flex-wrap md:text-left text-center order-first">
-      {/* 1st row  */}
-      <div className="lg:w-[25%] md:w-1/2 w-full px-4 flex justify-center items-center space-x-5">
-        <h2 className="font-medium text-gray-400 tracking-widest text-xl mb-3">
-          400 University Drive Suite 200 Coral Gables,<br /> FL 33134 USA
-        </h2>
-      </div>
-      {/* 2 row  */}
-      <div className="lg:w-1/4 md:w-1/2 w-full px-10">
-        <h2 className="title-font font-medium text-gray-400 tracking-widest text-2xl mb-3">
-          Links
-        </h2>
-        <nav className="list-none mb-10 space-y-5">
-          <li>
-            <a className="text-black text-2xl">Home</a>
-          </li>
-          <li>
-            <a className="text-black text-2xl">Shop</a>
-          </li>
-          <li>
-            <a className="text-black text-2xl">About</a>
-          </li>
-          <li>
-            <a className="text-black text-2xl">Contact</a>
-          </li>
-        </nav>
-      </div>
-      {/* 3 row  */}
-      <div className="lg:w-1/4 md:w-1/2 w-full px-4">
-        <h2 className="title-font font-medium text-gray-400 tracking-widest text-2xl mb-3">
-          Help
-        </h2>
-        <nav className="list-none mb-10 space-y-5">
-          <li>
-            <a className="text-black text-2xl">Payment Options</a>
-          </li>
-          <li>
-            <a className="text-black text-2xl">Returns</a>
-          </li>
-          <li>
-            <a className="text-black text-2xl">Privacy Policies</a>
-          </li>
-        </nav>
-      </div>
-      {/* 4 row  */}
-      <div className="lg:w-1/4 md:w-1/2 w-full px-4">
-        <h2 className="title-font font-medium text-gray-400 tracking-widest text-2xl mb-3">
-          NewsLetter
-        </h2>
-        <nav className="list-none mb-10 space-y-5">
-        <div className="flex xl:flex-nowrap md:flex-nowrap lg:flex-wrap flex-wrap justify-center items-end md:justify-start">
-          <div className="relative w-[100px] sm:w-auto xl:mr-4 lg:mr-0 sm:mr-4 mr-2">
-            <input
-              type="text"
-              id="footer-field"
-              name="footer-field"
-              className="w-[200px] rounded border-b-2 border-black  text-base py-1 leading-8 focus:outline-none "
-              placeholder='Enter Your Email Address'
-            />
-          </div>
-          <button className="lg:mt-2 xl:mt-0 flex-shrink-0 inline-flex border-b-2 border-black py-2 px-6 focus:outline-none rounded text-[25px]">
-            Button
-          </button>
-        </div>
-        </nav>
-      </div>
-    </div>
-  </div>
-  <div className="">
-    <div className="container px-5 py-6 mx-auto flex items-center sm:flex-row flex-col">
-      <a className="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
-        {/* <span className="ml-3 text-xl">Tailblocks</span> */}
-      </a>
-      <p className="text-xl text-gray-500 sm:ml-6 sm:mt-0 mt-4">
-        2022 Meubel House. All rights reserved
-      </p>
-    </div>
-  </div>
-</footer>
-
         </div>
       </div>
     </div>

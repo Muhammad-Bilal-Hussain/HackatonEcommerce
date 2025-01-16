@@ -1,5 +1,6 @@
-import React from 'react'
-import Image from "next/image";
+"use client"
+import React, { useState } from 'react'
+import Image from 'next/image'
 import manicon from "../../../public/manicon.png"
 import manicon1 from "../../../public/searchicon.png"
 import manicon2 from "../../../public/heart icon.png"
@@ -8,49 +9,92 @@ import shopbg from "../../../public/shopbg.jpeg"
 import shopicon from "../../../public/shopicon.png"
 import Link from 'next/link';
 
-function page() {
+const page =()=> {
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    // Function to toggle the menu
+    const toggleMenu = () => {
+      setIsMenuOpen(!isMenuOpen);
+    };
   return (
     <div>
         {/* navbar  */}
         <section>
-  <div className="max-w-full bg-[#ffffff]">
-    <div className="max-w-7xl mx-auto py-6 px-6 lg:px-10">
-      <nav className="flex flex-wrap justify-between items-center px-4 py-3">
-        {/* Navigation Links */}
-        <ul className="flex flex-wrap justify-center space-x-6 lg:space-x-24 text-gray-700 text-sm lg:text-lg">
-          <li>
-            <Link href={"/"} className="hover:text-black font-bold">
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link href={"/shop"} className="hover:text-black font-bold">
-              Shop
-            </Link>
-          </li>
-          <li>
-            <a href="#" className="hover:text-black font-bold">
-              About
-            </a>
-          </li>
-          <li>
-            <Link href={"/contact"} className="hover:text-black font-bold">
-              Contact
-            </Link>
-          </li>
-        </ul>
-        {/* Icons */}
-        <div className="flex flex-wrap justify-center space-x-4 lg:space-x-10 text-gray-700 mt-4 lg:mt-0">
-          <Image src={manicon} alt="icon" className="w-8 lg:w-[50px] cursor-pointer" />
-          <Image src={manicon1} alt="icon" className="w-8 lg:w-[50px] cursor-pointer" />
-          <Image src={manicon2} alt="icon" className="w-8 lg:w-[50px] cursor-pointer" />
-          <Image src={manicon3} alt="icon" className="w-8 lg:w-[50px] cursor-pointer" />
-        </div>
-      </nav>
+        <div className="max-w-full bg-[#ffffff]">
+    <div className="max-w-7xl mx-auto px-4 lg:px-10">
+{/* Navbar */}
+<nav className="w-full px-4 py-4">
+  <div className="max-w-[1440px] mx-auto flex justify-between items-center">
+    {/* Navigation Links */}
+    <div className="flex items-center">
+      <button
+        className="block md:hidden text-gray-700 text-2xl font-bold focus:outline-none"
+        onClick={toggleMenu}
+      >
+        ☰
+      </button>
+      <ul
+        className={`${
+          isMenuOpen ? "block" : "hidden"
+        } absolute md:static top-16 left-0 w-full md:w-auto md:flex bg-[#f6e6b8] md:bg-transparent space-y-4 md:space-y-0 md:space-x-8 text-center md:text-left px-4 py-6 md:py-0`}
+      >
+        <li>
+          <a href="\" className="text-lg font-semibold hover:text-black">
+            Home
+          </a>
+        </li>
+        <li>
+          <Link
+            href={"/shop"}
+            className="hover:text-black text-lg font-semibold"
+          >
+            Shop
+          </Link>
+        </li>
+        <li>
+          <a href="#" className="hover:text-black text-lg font-semibold">
+            About
+          </a>
+        </li>
+        <li>
+          <a href="/contact" className="hover:text-black text-lg font-semibold">
+            Contact
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    {/* Icons */}
+    <div className="flex items-center space-x-4 md:space-x-10">
+      <a href="/myaccount">
+      <Image
+        src={manicon}
+        alt="icon"
+        className="w-8 md:w-10 h-8 md:h-10 cursor-pointer"
+      />
+      </a>
+      <Image
+        src={manicon1}
+        alt="icon"
+        className="w-8 md:w-10 h-8 md:h-10 cursor-pointer"
+      />
+      <Image
+        src={manicon2}
+        alt="icon"
+        className="w-8 md:w-10 h-8 md:h-10 cursor-pointer"
+      />
+      <a href="/cart">
+      <Image
+        src={manicon3}
+        alt="icon"
+        className="w-8 md:w-10 h-8 md:h-10 cursor-pointer"
+      />
+      </a>
+    </div>
+  </div>
+</nav>
     </div>
   </div>
 </section>
-
 {/* Shop Hero Section */}
 <div className="max-w-full relative">
   <Image
@@ -73,67 +117,77 @@ function page() {
   </div>
 </div>
 {/* Login or Register */}
-<div className='max-w-full'>
-  <div className='max-w-7xl mx-auto py-10 px-4 sm:px-6 lg:px-10'>
-    <div className='flex flex-col lg:flex-row justify-between items-center space-y-10 lg:space-y-0'>
+<div className="max-w-full">
+  <div className="max-w-7xl mx-auto py-10 px-4 sm:px-6 lg:px-10">
+    <div className="flex flex-col lg:flex-row justify-between items-start space-y-10 lg:space-y-0 lg:space-x-10">
       
       {/* Login side */}
-      <div className='space-y-10 px-6 sm:px-10 py-10'>
-        <h1 className='text-4xl sm:text-5xl font-bold mb-5'>Login</h1>
-        <div className='space-y-5'>
-          <label htmlFor="user-or-email" className='text-lg font-medium block'>User or Email Address</label>
+      <div className="space-y-10 px-6 sm:px-10 py-10 lg:w-1/2">
+        <h1 className="text-4xl sm:text-5xl font-bold mb-5">Login</h1>
+        <div className="space-y-5">
+          <label htmlFor="user-or-email" className="text-lg font-medium block">
+            User or Email Address
+          </label>
           <input
             type="text"
             id="user-or-email"
-            className='border border-gray-400 w-full sm:w-[300px] h-[60px] rounded-xl px-4'
+            className="border border-gray-400 w-full h-[60px] rounded-xl px-4"
           />
         </div>
-        <div className='space-y-5'>
-          <label htmlFor="password" className='block text-lg font-medium'>Password</label>
+        <div className="space-y-5">
+          <label htmlFor="password" className="block text-lg font-medium">
+            Password
+          </label>
           <input
             type="password"
             id="password"
-            className='border border-gray-400 w-full sm:w-[300px] h-[60px] rounded-xl px-4'
+            className="border border-gray-400 w-full h-[60px] rounded-xl px-4"
           />
         </div>
-        <div className='space-x-5 flex items-center'>
+        <div className="space-x-5 flex items-center">
           <input
             type="checkbox"
             id="checkbox"
-            className='border border-gray-400 w-[20px] h-[20px] rounded-xl'
+            className="border border-gray-400 w-[20px] h-[20px] rounded-xl"
           />
-          <label htmlFor="checkbox" className='text-sm sm:text-base'>Remember me</label>
+          <label htmlFor="checkbox" className="text-sm sm:text-base">
+            Remember me
+          </label>
         </div>
-        <div className='space-x-5 flex items-center'>
-          <button className='border border-gray-500 w-full sm:w-[180px] h-[45px] rounded-xl text-lg font-medium'>
+        <div className="space-x-5 flex items-center">
+          <button className="border border-gray-500 w-full sm:w-[180px] h-[45px] rounded-xl text-lg font-medium">
             Log In
           </button>
-          <p className='text-sm sm:text-base font-medium'>Lost Your Password?</p>
+          <p className="text-sm sm:text-base font-medium">Lost Your Password?</p>
         </div>
       </div>
 
       {/* Register side */}
-      <div className='space-y-10 px-6 sm:px-10 py-10'>
-        <h1 className='text-4xl sm:text-5xl font-bold mb-5'>Register</h1>
-        <div className='space-y-5'>
-          <label htmlFor="email" className='block text-lg font-medium'>Email Address</label>
+      <div className="space-y-10 px-6 sm:px-10 py-10 lg:w-1/2">
+        <h1 className="text-4xl sm:text-5xl font-bold mb-5">Register</h1>
+        <div className="space-y-5">
+          <label htmlFor="email" className="block text-lg font-medium">
+            Email Address
+          </label>
           <input
             type="text"
             id="email"
-            className='border border-gray-400 w-full sm:w-[300px] h-[60px] rounded-xl px-4'
+            className="border border-gray-400 w-full h-[60px] rounded-xl px-4"
           />
         </div>
-        <div className='space-y-5'>
-          <p className='text-gray-400 text-sm sm:text-base'>
+        <div className="space-y-5">
+          <p className="text-gray-400 text-sm sm:text-base">
             A link to set a new password will be sent to your email address.
           </p>
-          <p className='text-gray-400 text-sm sm:text-base'>
-            Your personal data will be used to support your experience throughout this website, to manage access to your account, and for other purposes described in our
-            <b className='text-black font-medium'> privacy policy.</b>
+          <p className="text-gray-400 text-sm sm:text-base">
+            Your personal data will be used to support your experience
+            throughout this website, to manage access to your account, and for
+            other purposes described in our
+            <b className="text-black font-medium"> privacy policy.</b>
           </p>
         </div>
-        <div className='space-x-5 flex items-center'>
-          <button className='border border-gray-500 w-full sm:w-[180px] h-[45px] rounded-xl text-lg font-medium'>
+        <div className="space-x-5 flex items-center">
+          <button className="border border-gray-500 w-full sm:w-[180px] h-[45px] rounded-xl text-lg font-medium">
             Register
           </button>
         </div>
@@ -141,9 +195,8 @@ function page() {
     </div>
   </div>
 </div>
-
-            {/* free delivery line  */}
-            <div className='max-w-full bg-[#fbf3f3] py-10 mt-10'> 
+      {/* free delivery line  */}
+      <div className='max-w-full bg-[#fbf3f3] py-10 mt-10'> 
         <div className='max-w-[120rem] mx-auto py-10 px-10'>
           <div className='grid grid-cols-1 lg:grid-cols-3 gap-8'>
             {/* 1st card cols */}
@@ -162,93 +215,6 @@ function page() {
               <p className='text-3xl text-gray-400'>100% secure payment, consectetur adipim scing elit</p>
               </div>
           </div>
-        </div>
-      </div>
-        {/* Footer  */}
-      <div className='max-w-full'>
-        <div className='max-w-7xl mx-auto py-10 px-10'>
-        <footer className="text-gray-600 body-font">
-  <div className="container px-5 py-24 mx-auto">
-    <div className="flex flex-wrap md:text-left text-center order-first">
-      {/* 1st row  */}
-      <div className="lg:w-[25%] md:w-1/2 w-full px-4 flex justify-center items-center space-x-5">
-        <h2 className="font-medium text-gray-400 tracking-widest text-xl mb-3">
-          400 University Drive Suite 200 Coral Gables,<br /> FL 33134 USA
-        </h2>
-      </div>
-      {/* 2 row  */}
-      <div className="lg:w-1/4 md:w-1/2 w-full px-10">
-        <h2 className="title-font font-medium text-gray-400 tracking-widest text-2xl mb-3">
-          Links
-        </h2>
-        <nav className="list-none mb-10 space-y-5">
-          <li>
-            <a className="text-black text-2xl">Home</a>
-          </li>
-          <li>
-            <a className="text-black text-2xl">Shop</a>
-          </li>
-          <li>
-            <a className="text-black text-2xl">About</a>
-          </li>
-          <li>
-            <a className="text-black text-2xl">Contact</a>
-          </li>
-        </nav>
-      </div>
-      {/* 3 row  */}
-      <div className="lg:w-1/4 md:w-1/2 w-full px-4">
-        <h2 className="title-font font-medium text-gray-400 tracking-widest text-2xl mb-3">
-          Help
-        </h2>
-        <nav className="list-none mb-10 space-y-5">
-          <li>
-            <a className="text-black text-2xl">Payment Options</a>
-          </li>
-          <li>
-            <a className="text-black text-2xl">Returns</a>
-          </li>
-          <li>
-            <a className="text-black text-2xl">Privacy Policies</a>
-          </li>
-        </nav>
-      </div>
-      {/* 4 row  */}
-      <div className="lg:w-1/4 md:w-1/2 w-full px-4">
-        <h2 className="title-font font-medium text-gray-400 tracking-widest text-2xl mb-3">
-          NewsLetter
-        </h2>
-        <nav className="list-none mb-10 space-y-5">
-        <div className="flex xl:flex-nowrap md:flex-nowrap lg:flex-wrap flex-wrap justify-center items-end md:justify-start">
-          <div className="relative w-[100px] sm:w-auto xl:mr-4 lg:mr-0 sm:mr-4 mr-2">
-            <input
-              type="text"
-              id="footer-field"
-              name="footer-field"
-              className="w-[200px] rounded border-b-2 border-black  text-base py-1 leading-8 focus:outline-none "
-              placeholder='Enter Your Email Address'
-            />
-          </div>
-          <button className="lg:mt-2 xl:mt-0 flex-shrink-0 inline-flex border-b-2 border-black py-2 px-6 focus:outline-none rounded text-[25px]">
-            Button
-          </button>
-        </div>
-        </nav>
-      </div>
-    </div>
-  </div>
-  <div className="">
-    <div className="container px-5 py-6 mx-auto flex items-center sm:flex-row flex-col">
-      <a className="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
-        {/* <span className="ml-3 text-xl">Tailblocks</span> */}
-      </a>
-      <p className="text-xl text-gray-500 sm:ml-6 sm:mt-0 mt-4">
-        2022 Meubel House. All rights reserved
-      </p>
-    </div>
-  </div>
-</footer>
-
         </div>
       </div>
     </div>

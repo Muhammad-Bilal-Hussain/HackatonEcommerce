@@ -1,4 +1,5 @@
-import React from 'react'
+"use client"
+import React, { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Image from 'next/image'
 import manicon from "../../../public/manicon.png"
@@ -19,90 +20,116 @@ import newarrival from "../../../public/new arival sofa.jpg"
 import watchicon from "../../../public/watchicon.jpg"
 import calndericon from "../../../public/calendericon.jpg"
 import bgpic from "../../../public/intagrambg pic.jpg"
-import { faFacebook } from '@fortawesome/free-brands-svg-icons/faFacebook'
 import Link from 'next/link'
 
-function Hero() {
+
+
+const Hero=()=> {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  // Function to toggle the menu
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
   return (
     <div>
-      {/* hero div  */}
-      <div className="max-w-full bg-[#f6e6b8]">
-  <div className="max-w-7xl mx-auto py-10 px-6">
-    <>
-      {/* Navbar */}
-      <nav className="flex flex-wrap justify-between items-center px-4 py-4">
-        {/* Navigation Links */}
-        <ul className="flex flex-wrap space-x-6 text-gray-700">
-          <li>
-            <a href="#" className="text-lg font-bold hover:text-black">
-              Home
-            </a>
-          </li>
-          <li>
-            <Link href={"/shop"} className="hover:text-black text-lg font-bold">
-              Shop
-            </Link>
-          </li>
-          <li>
-            <a href="#" className="hover:text-black text-lg font-bold">
-              About
-            </a>
-          </li>
-          <li>
-            <a href="/contact" className="hover:text-black text-lg font-bold">
-              Contact
-            </a>
-          </li>
-        </ul>
-        {/* Icons */}
-        <div className="flex flex-wrap space-x-4 text-gray-700 mt-4 sm:mt-0">
-          <Image
-            src={manicon}
-            alt="icon"
-            className="w-10 h-10 cursor-pointer"
-          />
-          <Image
-            src={manicon1}
-            alt="icon"
-            className="w-10 h-10 cursor-pointer"
-          />
-          <Image
-            src={manicon2}
-            alt="icon"
-            className="w-10 h-10 cursor-pointer"
-          />
-          <Image
-            src={manicon3}
-            alt="icon"
-            className="w-10 h-10 cursor-pointer"
-          />
-        </div>
-      </nav>
-
-      {/* Hero Section */}
-      <section className="flex flex-col md:flex-row items-center justify-between px-4 py-10">
-        {/* Text Content */}
-        <div className="text-center md:text-left space-y-4 mb-6 md:mb-0">
-          <h1 className="text-4xl md:text-6xl font-bold text-gray-800 leading-tight">
-            Rocket Single <br /> Seater
-          </h1>
-          <a
-            href="#"
-            className="inline-block text-xl md:text-2xl font-medium text-gray-800 underline hover:text-black"
-          >
-            Shop Now
+{/* Hero Div */}
+<div className="max-w-full bg-[#f6e6b8]">
+  <div className="max-w-[1440px] min-h-screen flex flex-col items-center mx-auto px-4 md:px-10">
+{/* Navbar */}
+<nav className="w-full bg-[#f6e6b8] px-4 py-4">
+  <div className="max-w-[1440px] mx-auto flex justify-between items-center">
+    {/* Navigation Links */}
+    <div className="flex items-center">
+      <button
+        className="block md:hidden text-gray-700 text-2xl font-bold focus:outline-none"
+        onClick={toggleMenu}
+      >
+        ☰
+      </button>
+      <ul
+        className={`${
+          isMenuOpen ? "block" : "hidden"
+        } absolute md:static top-16 left-0 w-full md:w-auto md:flex bg-[#f6e6b8] md:bg-transparent space-y-4 md:space-y-0 md:space-x-8 text-center md:text-left px-4 py-6 md:py-0`}
+      >
+        <li>
+          <a href="#" className="text-lg font-semibold hover:text-black">
+            Home
           </a>
-        </div>
-        {/* Image */}
-        <div className="mt-6 md:mt-0">
-          <Image
-            src={herosofa}
-            alt="Rocket Single Seater"
-            className="w-full max-w-xs md:max-w-md rounded-lg"
-          />
-        </div>
-      </section>
-    </>
+        </li>
+        <li>
+          <Link
+            href={"/shop"}
+            className="hover:text-black text-lg font-semibold"
+          >
+            Shop
+          </Link>
+        </li>
+        <li>
+          <a href="#" className="hover:text-black text-lg font-semibold">
+            About
+          </a>
+        </li>
+        <li>
+          <a href="/contact" className="hover:text-black text-lg font-semibold">
+            Contact
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    {/* Icons */}
+    <div className="flex items-center space-x-4 md:space-x-10">
+    <a href="/myaccount">
+      <Image
+        src={manicon}
+        alt="icon"
+        className="w-8 md:w-10 h-8 md:h-10 cursor-pointer"
+      />
+      </a>
+      <Image
+        src={manicon1}
+        alt="icon"
+        className="w-8 md:w-10 h-8 md:h-10 cursor-pointer"
+      />
+      <Image
+        src={manicon2}
+        alt="icon"
+        className="w-8 md:w-10 h-8 md:h-10 cursor-pointer"
+      />
+      <a href="/cart">
+      <Image
+        src={manicon3}
+        alt="icon"
+        className="w-8 md:w-10 h-8 md:h-10 cursor-pointer"
+      />
+      </a>
+    </div>
+  </div>
+</nav>
+
+    {/* Hero Section */}
+    <section className="flex flex-col md:flex-row items-center justify-between md:mt-[100px] max-sm:mt-[228px] w-full px-4 space-y-6 md:space-y-0">
+      {/* Text Content */}
+      <div className="text-center md:text-left space-y-4">
+        <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold text-gray-800 leading-tight">
+          Rocket Single <br /> Seater
+        </h1>
+        <a
+          href="#"
+          className="inline-block text-xl md:text-2xl font-medium text-gray-800 underline hover:text-black"
+        >
+          Shop Now
+        </a>
+      </div>
+      {/* Image */}
+      <div className="mt-10 md:mt-0 flex justify-center md:justify-end">
+        <Image
+          src={herosofa}
+          alt="Rocket Single Seater"
+          className="w-full max-w-xs sm:max-w-sm md:max-w-md rounded-lg"
+        />
+      </div>
+    </section>
   </div>
 </div>
       {/* side table div  */}
@@ -232,7 +259,7 @@ function Hero() {
       </div>
     </div>
   </div>
-</div>
+      </div>
       {/* card div 2  */}
       <div className='max-w-full'>
         <div className='max-w-7xl mx-auto py-10 px-10'>
@@ -320,93 +347,6 @@ function Hero() {
             <button className='shadow-md bg-white text-black w-[200px] h-[50px] rounded-full text-2xl hover:bg-gray-100 hover:font-medium'>Follow Us</button>
           </div>
           </div>
-        </div>
-      </div>
-        {/* Footer  */}
-        <div className='max-w-full'>
-        <div className='max-w-7xl mx-auto py-10 px-10'>
-        <footer className="text-gray-600 body-font">
-  <div className="container px-5 py-24 mx-auto">
-    <div className="flex flex-wrap md:text-left text-center order-first">
-      {/* 1st row  */}
-      <div className="lg:w-[25%] md:w-1/2 w-full px-4 flex justify-center items-center space-x-5">
-        <h2 className="font-medium text-gray-400 tracking-widest text-xl mb-3">
-          400 University Drive Suite 200 Coral Gables,<br /> FL 33134 USA
-        </h2>
-      </div>
-      {/* 2 row  */}
-      <div className="lg:w-1/4 md:w-1/2 w-full px-10">
-        <h2 className="title-font font-medium text-gray-400 tracking-widest text-2xl mb-3">
-          Links
-        </h2>
-        <nav className="list-none mb-10 space-y-5">
-          <li>
-            <a className="text-black text-2xl">Home</a>
-          </li>
-          <li>
-            <a className="text-black text-2xl">Shop</a>
-          </li>
-          <li>
-            <a className="text-black text-2xl">About</a>
-          </li>
-          <li>
-            <a className="text-black text-2xl">Contact</a>
-          </li>
-        </nav>
-      </div>
-      {/* 3 row  */}
-      <div className="lg:w-1/4 md:w-1/2 w-full px-4">
-        <h2 className="title-font font-medium text-gray-400 tracking-widest text-2xl mb-3">
-          Help
-        </h2>
-        <nav className="list-none mb-10 space-y-5">
-          <li>
-            <a className="text-black text-2xl">Payment Options</a>
-          </li>
-          <li>
-            <a className="text-black text-2xl">Returns</a>
-          </li>
-          <li>
-            <a className="text-black text-2xl">Privacy Policies</a>
-          </li>
-        </nav>
-      </div>
-      {/* 4 row  */}
-      <div className="lg:w-1/4 md:w-1/2 w-full px-4">
-        <h2 className="title-font font-medium text-gray-400 tracking-widest text-2xl mb-3">
-          NewsLetter
-        </h2>
-        <nav className="list-none mb-10 space-y-5">
-        <div className="flex xl:flex-nowrap md:flex-nowrap lg:flex-wrap flex-wrap justify-center items-end md:justify-start">
-          <div className="relative w-[100px] sm:w-auto xl:mr-4 lg:mr-0 sm:mr-4 mr-2">
-            <input
-              type="text"
-              id="footer-field"
-              name="footer-field"
-              className="w-[200px] rounded border-b-2 border-black  text-base py-1 leading-8 focus:outline-none "
-              placeholder='Enter Your Email Address'
-            />
-          </div>
-          <button className="lg:mt-2 xl:mt-0 flex-shrink-0 inline-flex border-b-2 border-black py-2 px-6 focus:outline-none rounded text-[25px]">
-            Button
-          </button>
-        </div>
-        </nav>
-      </div>
-    </div>
-  </div>
-  <div className="">
-    <div className="container px-5 py-6 mx-auto flex items-center sm:flex-row flex-col">
-      <a className="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
-        {/* <span className="ml-3 text-xl">Tailblocks</span> */}
-      </a>
-      <p className="text-xl text-gray-500 sm:ml-6 sm:mt-0 mt-4">
-        2022 Meubel House. All rights reserved
-      </p>
-    </div>
-  </div>
-</footer>
-
         </div>
       </div>
     </div>
