@@ -1,43 +1,17 @@
-import { defineType, defineField, defineArrayMember } from 'sanity';
-
-export default defineType({
-    name: 'products',
+export default {
+    name: 'product',
+    title: 'Product',
     type: 'document',
-    title: 'Shop Products',
     fields: [
-        defineField({
-            name: 'image',
-            type: 'image',
-            title: 'Product Picture',
-            validation: Rule => Rule.required()
-        }),
-        defineField({
-            name: 'title',
-            type: 'string',
-            title: 'Product Name',
-            validation: Rule => Rule.required()
-        }),
-        defineField({
-            name: 'price',
-            type: 'number',
-            title: 'Product Price',
-            validation: Rule => Rule.required()
-        }),
-        defineField({
-            name: 'summary',
-            type: 'text',
-            title: 'Summary',
-            validation: Rule => Rule.required()
-        }),
-        defineField({
-            name: 'slug',
-            type: 'slug',
-            title: 'Slug',
-            options: {
-                source: 'title',
-                maxLength: 96
-            },
-            validation: Rule => Rule.required()
-        }),
-    ]
-    })
+      { name: 'id', title: 'ID', type: 'string' },
+      { name: 'name', title: 'Name', type: 'string' },
+      { name: 'imagePath', title: 'Image Path', type: 'url' },
+      { name: 'price', title: 'Price', type: 'number' },
+      { name: 'description', title: 'Description', type: 'text' },
+      { name: 'discountPercentage', title: 'Discount Percentage', type: 'number' },
+      { name: 'isFeaturedProduct', title: 'Is Featured Product', type: 'boolean' },
+      { name: 'stockLevel', title: 'Stock Level', type: 'number' },
+      { name: 'category', title: 'Category', type: 'string' },
+    ],
+  };
+  

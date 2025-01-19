@@ -1,79 +1,34 @@
+"use client"
 import React from 'react'
 import Image from "next/image";
-import manicon from "../../../public/manicon.png"
-import manicon1 from "../../../public/searchicon.png"
-import manicon2 from "../../../public/heart icon.png"
-import manicon3 from "../../../public/carticon.png"
 import shopbg from "../../../public/shopbg.jpeg"
 import shopicon from "../../../public/shopicon.png"
 import filtericon from "../../../public/filtericon.jpg"
 import cateicon from "../../../public/cateicon.jpg"
 import cateicon1 from "../../../public/cateicon1.jpg"
-import sofa1 from "../../../public/sofa1.jpg"
-import sofa2 from "../../../public/sofa2.png"
-import sofa3 from "../../../public/sofa3.png"
-import sofa4 from "../../../public/sofa4.jpg"
-import sofa5 from "../../../public/sofa5.jpg"
-import sofa6 from "../../../public/sofa6.jpg"
-import sofa7 from "../../../public/sofa7.jpg"
-import sofa8 from "../../../public/sofa8.jpg"
-import sofa9 from "../../../public/sofa9.jpg"
-import sofa10 from "../../../public/sofa10.jpg"
-import sofa11 from "../../../public/sofa11.jpg"
-import sofa12 from "../../../public/sofa12.jpg"
-import sofa13 from "../../../public/sofa13.jpg"
 import Link from 'next/link';
 import { client } from '@/sanity/lib/client';
 import ShopProduct from '../components/ShopProduct';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+
+interface Product {
+  _id: string;
+  name: string;
+  imagePath: string; // Assume imagePath is a valid URL string
+  description: string;
+  price: number;
+  category: string;
+  stockLevel: number;
+  isFeaturedProduct: boolean;
+}
 
 export default async function Shop() {
-  const query = `*[_type=='products'] | order(_createAt asc) {
-         title ,image, price,
-        "slug":slug.current,
-          }`
-          const data: productData[] = await client.fetch(query);
+  const products: Product[] = await client.fetch(`*[_type == 'product']`);
   return (
     <div>
       {/* navbar  */}
-    <section>
-  <div className="max-w-full bg-[#ffffff]">
-    <div className="max-w-7xl mx-auto py-6 px-6 lg:px-10">
-      <nav className="flex flex-wrap justify-between items-center px-4 py-3">
-        {/* Navigation Links */}
-        <ul className="flex flex-wrap justify-center space-x-6 lg:space-x-24 text-gray-700 text-sm lg:text-lg">
-          <li>
-            <Link href={"/"} className="hover:text-black font-bold">
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link href={"/shop"} className="hover:text-black font-bold">
-              Shop
-            </Link>
-          </li>
-          <li>
-            <a href="#" className="hover:text-black font-bold">
-              About
-            </a>
-          </li>
-          <li>
-            <Link href={"/contact"} className="hover:text-black font-bold">
-              Contact
-            </Link>
-          </li>
-        </ul>
-        {/* Icons */}
-        <div className="flex flex-wrap justify-center space-x-4 lg:space-x-10 text-gray-700 mt-4 lg:mt-0">
-          <Image src={manicon} alt="icon" className="w-8 lg:w-[50px] cursor-pointer" />
-          <Image src={manicon1} alt="icon" className="w-8 lg:w-[50px] cursor-pointer" />
-          <Image src={manicon2} alt="icon" className="w-8 lg:w-[50px] cursor-pointer" />
-          <Image src={manicon3} alt="icon" className="w-8 lg:w-[50px] cursor-pointer" />
-        </div>
-      </nav>
-    </div>
-  </div>
-    </section>
-
+    <Header/>
 {/* Shop Hero Section */}
 <div className="max-w-full relative">
   <Image
@@ -142,32 +97,20 @@ export default async function Shop() {
     {/* Product Grid */}
     <div className="grid grid-cols-1 grid-rows-4 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-20">
     {/* Product Card 1 */}
-    {
-      data.map((product:productData) => (
-        <ShopProduct data={product} key={product.slug} />
+
+    {products.map((products:productData) => (
+        <ShopProduct data={products} key={products._id} />
       ))
     }
-
-
-    {/* <div className="">
-      <Image
-        src={card1sofa}
-        alt="Product 1"
-        className="mx-auto mb-4"
-      />
-      <h3 className="text-xl font-light px-10 ">Trenton modular sofa_3</h3>
-      <p className="text-gray-600 text-2xl font-bold px-10 mr-10 mt-2">Rs. 25,000.00</p>
-    </div> */}
-  
     </div>
         </div>
-        <div className='flex justify-center items-center space-x-10 '>
+          <div className='flex justify-center items-center space-x-10 '>
         <p className='bg-[#fde6a7] rounded-xl w-[75px] h-[75px] justify-center items-center flex text-3xl'>1</p>
         <p className='bg-[#fbf5e3] rounded-xl w-[70px] h-[70px] justify-center items-center flex text-3xl'>2</p>
         <p className='bg-[#fbf5e3] rounded-xl w-[70px] h-[70px] justify-center items-center flex text-3xl'>3</p>
         <p className='bg-[#fbf5e3] rounded-xl w-[150px] h-[70px] justify-center items-center flex text-3xl'>NEXT</p>
+          </div>
         </div>
-            </div>
       </div>
       {/* free delivery line  */}
       <div className='max-w-full bg-[#fbf3f3] py-10 mt-10'> 
@@ -192,92 +135,7 @@ export default async function Shop() {
         </div>
       </div>
         {/* Footer  */}
-      <div className='max-w-full'>
-        <div className='max-w-7xl mx-auto py-10 px-10'>
-        <footer className="text-gray-600 body-font">
-  <div className="container px-5 py-24 mx-auto">
-    <div className="flex flex-wrap md:text-left text-center order-first">
-      {/* 1st row  */}
-      <div className="lg:w-[25%] md:w-1/2 w-full px-4 flex justify-center items-center space-x-5">
-        <h2 className="font-medium text-gray-400 tracking-widest text-xl mb-3">
-          400 University Drive Suite 200 Coral Gables,<br /> FL 33134 USA
-        </h2>
-      </div>
-      {/* 2 row  */}
-      <div className="lg:w-1/4 md:w-1/2 w-full px-10">
-        <h2 className="title-font font-medium text-gray-400 tracking-widest text-2xl mb-3">
-          Links
-        </h2>
-        <nav className="list-none mb-10 space-y-5">
-          <li>
-            <a className="text-black text-2xl">Home</a>
-          </li>
-          <li>
-            <a className="text-black text-2xl">Shop</a>
-          </li>
-          <li>
-            <a className="text-black text-2xl">About</a>
-          </li>
-          <li>
-            <a className="text-black text-2xl">Contact</a>
-          </li>
-        </nav>
-      </div>
-      {/* 3 row  */}
-      <div className="lg:w-1/4 md:w-1/2 w-full px-4">
-        <h2 className="title-font font-medium text-gray-400 tracking-widest text-2xl mb-3">
-          Help
-        </h2>
-        <nav className="list-none mb-10 space-y-5">
-          <li>
-            <a className="text-black text-2xl">Payment Options</a>
-          </li>
-          <li>
-            <a className="text-black text-2xl">Returns</a>
-          </li>
-          <li>
-            <a className="text-black text-2xl">Privacy Policies</a>
-          </li>
-        </nav>
-      </div>
-      {/* 4 row  */}
-      <div className="lg:w-1/4 md:w-1/2 w-full px-4">
-        <h2 className="title-font font-medium text-gray-400 tracking-widest text-2xl mb-3">
-          NewsLetter
-        </h2>
-        <nav className="list-none mb-10 space-y-5">
-        <div className="flex xl:flex-nowrap md:flex-nowrap lg:flex-wrap flex-wrap justify-center items-end md:justify-start">
-          <div className="relative w-[100px] sm:w-auto xl:mr-4 lg:mr-0 sm:mr-4 mr-2">
-            <input
-              type="text"
-              id="footer-field"
-              name="footer-field"
-              className="w-[200px] rounded border-b-2 border-black  text-base py-1 leading-8 focus:outline-none "
-              placeholder='Enter Your Email Address'
-            />
-          </div>
-          <button className="lg:mt-2 xl:mt-0 flex-shrink-0 inline-flex border-b-2 border-black py-2 px-6 focus:outline-none rounded text-[25px]">
-            Button
-          </button>
-        </div>
-        </nav>
-      </div>
-    </div>
-  </div>
-  <div className="">
-    <div className="container px-5 py-6 mx-auto flex items-center sm:flex-row flex-col">
-      <a className="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
-        {/* <span className="ml-3 text-xl">Tailblocks</span> */}
-      </a>
-      <p className="text-xl text-gray-500 sm:ml-6 sm:mt-0 mt-4">
-        2022 Meubel House. All rights reserved
-      </p>
-    </div>
-  </div>
-</footer>
-
-        </div>
-      </div>
+      <Footer/>
     </div>
   )
 }

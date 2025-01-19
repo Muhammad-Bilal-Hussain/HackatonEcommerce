@@ -7,26 +7,27 @@ import { faFacebook, faLinkedin, faTwitter } from '@fortawesome/free-brands-svg-
 import Image from 'next/image';
 import { urlForImage } from '@/sanity/lib/image';
 import Header from '@/app/components/Header';
+import Footer from '@/app/components/Footer';
 import Link from 'next/link';
 
-export default function Page({ params: { slug } }: { params: { slug: string } }) {
+export default function Page({ params: { _id } }: { params: { _id: string } }) {
     const [data, setData] = useState<any>(null);
     const [count, setCount] = useState<number>(1); // Explicitly typed state
     const { addToCart } = useCart(); // Access Cart Context
     const [activeTab, setActiveTab] = useState("description"); // State to manage active tab
 
     useEffect(() => {
-        const fetchData = async () => {
-            const query = `*[_type=='products' && slug.current=="${slug}"]{
-                summary, title, image, price,
-                "slug": slug.current
-            }[0]`;
-            const result = await client.fetch(query);
-            setData(result);
-        };
+      const fetchData = async () => {
+          const query = `*[_type == 'product' && _id
+== "${_id}"]{name, price, imagePath, discountPercentage,stockLevel,
+  description, category
+}[0]`;
+          const result = await client.fetch(query);
+          setData(result);
+      };
 
         fetchData();
-    }, [slug]);
+    }, [_id]);
 
     if (!data) return <div className='text-center'>Loading...</div>;
 
@@ -48,18 +49,18 @@ export default function Page({ params: { slug } }: { params: { slug: string } })
         {/* Image Grid */}
             <div className='flex px-10'>
         <div>
-                <Image src={urlForImage(data.image).url()} alt='sofa 4' width={250} height={250} className='w-[250px]'></Image>
-                <Image src={urlForImage(data.image).url()} alt='sofa 4' width={250} height={250} className='w-[250px]'></Image>
-                <Image src={urlForImage(data.image).url()} alt='sofa 4' width={250} height={250} className='w-[250px]'></Image>
-                <Image src={urlForImage(data.image).url()} alt='sofa 4' width={250} height={250} className='w-[250px]'></Image>
+                {/* <img src={data.imagePath} alt='sofa 4' width="250" height="250" className='w-[250px]'></img>
+                <img src={data.imagePath} alt='sofa 4' width="250" height="250" className='w-[250px]'></img>
+                <img src={data.imagePath} alt='sofa 4' width="250" height="250" className='w-[250px]'></img>
+                <img src={data.imagePath} alt='sofa 4' width="250" height="250" className='w-[250px]'></img> */}
             </div>
             <div>
-            <Image src={urlForImage(data.image).url()} alt='sofa 4' width={400} height={400} className='w-[800px] mx-auto mb-4'></Image>
+            <img src={data.imagePath} alt='sofa 4' width="400" height="400" className='w-[800px] mx-auto mb-4'></img>
             </div>
             </div>
             {/* details product  */}
             <div className="col-span-1 space-y-6">
-      <h1 className="text-3xl font-bold">{data.title}</h1>
+      <h1 className="text-3xl font-bold">{data.name}</h1>
       <p className="text-2xl font-semibold text-gray-700">Rs. {data.price}.00</p>
       <div className="flex items-center space-x-2">
         {/* <!-- Stars --> */}
@@ -68,7 +69,7 @@ export default function Page({ params: { slug } }: { params: { slug: string } })
         <p className="text-gray-500 ml-5">5 Customer Review</p>
         </div>
       </div>
-      <p className="text-gray-600">{data.summary}</p>
+      <p className="text-gray-600">{data.description}</p>
       
       {/* <!-- Size Options --> */}
       <div>
@@ -205,6 +206,7 @@ export default function Page({ params: { slug } }: { params: { slug: string } })
     </div>
     </div>
   </div>
+  <Footer/>
     </div>
   )
 }

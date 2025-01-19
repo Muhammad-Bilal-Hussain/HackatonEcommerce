@@ -73,8 +73,8 @@ export default function Cart() {
         {/* Product Row */}
         <div className="grid grid-cols-4 gap-4 items-center py-4 px-2">
           <div className="col-span-2 flex items-center space-x-4">
-            <Image src={urlForImage(item.image).url()} alt="product image" width={60} height={60} className="w-[60px] h-auto" />
-            <p className="text-sm text-gray-400 sm:text-base">{item.title}</p>
+          <img src={item.imagePath} alt='sofa 4' width="60" height="60" className="w-[60px] h-auto"></img>
+            <p className="text-sm text-gray-400 sm:text-base">{item.name}</p>
           </div>
           <div className="flex justify-center items-center">
             <p className="text-gray-800 text-base border border-gray-400 rounded-lg w-[40px] h-[40px] flex justify-center items-center sm:text-lg">{item.quantity}</p>
@@ -82,7 +82,7 @@ export default function Cart() {
           <p className="text-sm text-black text-center sm:text-lg">Rs. {item.price * item.quantity}.00</p>
                           {/* Delete Button */}
                           <button
-                  onClick={() => removeFromCart(item.slug)}
+                  onClick={() => removeFromCart(item._id)}
                   className="text-red-500 border border-red-500 px-4 py-1 rounded"
                 >
                   Delete

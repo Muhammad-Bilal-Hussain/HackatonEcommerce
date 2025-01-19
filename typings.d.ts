@@ -1,7 +1,10 @@
 type productData ={
-    price: number,
-    title:string,
-    summary:string,
-    image:any,
-    slug:string
+    _id: string;
+    name: string;
+    imagePath: string;
+    description: string;
+    price: number;
+    category: string;
+    stockLevel: number;
+    isFeaturedProduct: boolean;
 }

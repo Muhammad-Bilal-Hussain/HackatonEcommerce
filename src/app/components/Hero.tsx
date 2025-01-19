@@ -66,7 +66,7 @@ const Hero=()=> {
           </Link>
         </li>
         <li>
-          <a href="#" className="hover:text-black text-lg font-semibold">
+          <a href="/blogs" className="hover:text-black text-lg font-semibold">
             About
           </a>
         </li>
@@ -116,7 +116,7 @@ const Hero=()=> {
           Rocket Single <br /> Seater
         </h1>
         <a
-          href="#"
+          href="/shop"
           className="inline-block text-xl md:text-2xl font-medium text-gray-800 underline hover:text-black"
         >
           Shop Now
@@ -138,9 +138,9 @@ const Hero=()=> {
         <div className='max-w-7xl mx-auto py-10 px-10'>
   {/* Two Item Section */}
   <section className="py-16 max-w-screen-xl mx-auto px-6">
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
       {/* Item 1 */}
-      <div className="flex flex-col space-y-4">
+      <div className="flex flex-col space-y-4 space-x-16">
         <Image
           src={table}
           alt="Side Table"
@@ -148,14 +148,14 @@ const Hero=()=> {
         />
         <h2 className="text-4xl font-semibold ">Side table</h2>
         <a
-          href="#"
+          href="/shop"
           className="text-2xl font-medium underline hover:text-black"
         >
           View More
         </a>
       </div>
       {/* Item 2 */}
-      <div className="flex flex-col space-y-4">
+      <div className="flex flex-col space-y-4 space-x-16">
       <Image
           src={sofa1}
           alt="Side Table"
@@ -163,7 +163,7 @@ const Hero=()=> {
         />
         <h2 className="text-4xl font-semibold ">Side table</h2>
         <a
-          href="#"
+          href="/shop"
           className="text-2xl font-medium underline hover:text-black"
         >
           View More
@@ -253,8 +253,9 @@ const Hero=()=> {
         <div className="text-center lg:text-left">
           <h2 className="text-xl md:text-2xl font-bold">New Arrivals</h2>
           <h1 className="text-3xl md:text-5xl font-bold mt-2">Asgaard Sofa</h1>
-          <button className="bg-[#f9edd3] text-black border border-black text-center text-lg md:text-[25px] w-[150px] md:w-[200px] h-[40px] md:h-[50px] mt-6">
-            Order Now
+          <button className="bg-[#f9edd3] text-black border border-black text-center text-lg md:text-[25px] w-[150px] md:w-[200px]
+           h-[40px] md:h-[50px] mt-6">
+            <a href="/shop">Order Now</a>
           </button>
         </div>
       </div>
@@ -330,7 +331,7 @@ const Hero=()=> {
   </div>
   {/* View More Button */}
   <div className="text-center mt-8">
-    <a href="#" className="text-black underline text-2xl font-medium">
+    <a href="/blogs" className="text-black underline text-2xl font-medium">
       View More
     </a>
   </div>
@@ -345,16 +346,14 @@ const Hero=()=> {
           <div className='text-center'>
             <h1 className='text-6xl font-black'>Our Instagram</h1>
             <p className='text-xl py-5'>Follow our store on Instangram</p>
-            <button className='shadow-md bg-white text-black w-[200px] h-[50px] rounded-full text-2xl hover:bg-gray-100 hover:font-medium'>Follow Us</button>
+            <button className='shadow-md bg-white text-black w-[200px] h-[50px] rounded-full text-2xl hover:bg-gray-100 hover:font-medium'><a href="#">Follow Us</a></button>
           </div>
           </div>
         </div>
       </div>
-
       {/* Footer  */}
       <Footer/>
     </div>
   )
 }
-
-export default Hero
+export default Hero;

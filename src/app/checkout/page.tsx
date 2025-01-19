@@ -117,7 +117,7 @@ export default function Page() {
     <div className='space-x-0 sm:space-x-20 flex flex-col sm:flex-row justify-between items-start sm:items-center w-full'>
       <div className='space-y-5'>
         <h1 className='text-lg font-medium'>Product</h1>
-        <p className='text-lg'><span className='text-gray-400'>{item.title}</span> * {item.quantity}</p>
+        <p className='text-lg'><span className='text-gray-400'>{item.name}</span> * {item.quantity}</p>
         <p className='text-lg'>Subtotal</p>
         <p className='text-lg'>Total</p>
       </div>

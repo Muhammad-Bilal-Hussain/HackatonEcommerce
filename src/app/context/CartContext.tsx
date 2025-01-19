@@ -12,12 +12,12 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   // Add to Cart Function
   const addToCart = (product: any, quantity: number) => {
     setCart((prev) => {
-      const existingProduct = prev.find((item) => item.slug === product.slug);
+      const existingProduct = prev.find((item) => item._id === product._id);
 
       if (existingProduct) {
         // Update quantity if product already exists in cart
         return prev.map((item) =>
-          item.slug === product.slug
+          item._id === product._id
             ? { ...item, quantity: item.quantity }
             : item
         );
@@ -29,8 +29,8 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   // Remove From Cart Function
-  const removeFromCart = (slug: string) => {
-    setCart((prev) => prev.filter((item) => item.slug !== slug));
+  const removeFromCart = (_id: string) => {
+    setCart((prev) => prev.filter((item) => item._id !== _id));
   };
 
   return (

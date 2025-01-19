@@ -33,26 +33,29 @@ const Header=()=>{
                               isMenuOpen ? "block" : "hidden"
                             } absolute md:static top-16 left-0 w-full md:w-auto md:flex bg-[#f6e6b8] md:bg-transparent space-y-4 md:space-y-0 md:space-x-8 text-center md:text-left px-4 py-6 md:py-0`}
                           >
-                            <li>
-                              <a href="\" className="text-base md:text-lg font-semibold hover:text-black">
-                                Home
-                              </a>
-                            </li>
-                            <li>
-                              <Link href={"/shop"} className="hover:text-black text-base md:text-lg font-semibold">
-                                Shop
-                              </Link>
-                            </li>
-                            <li>
-                              <a href="#" className="hover:text-black text-base md:text-lg font-semibold">
-                                About
-                              </a>
-                            </li>
-                            <li>
-                              <a href="/contact" className="hover:text-black text-base md:text-lg font-semibold">
-                                Contact
-                              </a>
-                            </li>
+          <li>
+          <a href="#" className="text-lg font-semibold hover:text-black">
+            Home
+          </a>
+        </li>
+        <li>
+          <Link
+            href={"/shop"}
+            className="hover:text-black text-lg font-semibold"
+          >
+            Shop
+          </Link>
+        </li>
+        <li>
+          <a href="/blogs" className="hover:text-black text-lg font-semibold">
+            About
+          </a>
+        </li>
+        <li>
+          <a href="/contact" className="hover:text-black text-lg font-semibold">
+            Contact
+          </a>
+        </li>
                           </ul>
                         </div>
                         {/* Icons */}

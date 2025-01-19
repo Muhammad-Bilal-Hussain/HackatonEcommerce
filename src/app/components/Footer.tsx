@@ -26,13 +26,13 @@ function footer() {
             <a href='#' className="text-black text-2xl">Home</a>
           </li>
           <li>
-            <a href='#' className="text-black text-2xl">Shop</a>
+            <a href='/shop' className="text-black text-2xl">Shop</a>
           </li>
           <li>
-            <a href='#' className="text-black text-2xl">About</a>
+            <a href='/blogs' className="text-black text-2xl">About</a>
           </li>
           <li>
-            <a href='#' className="text-black text-2xl">Contact</a>
+            <a href='/contact' className="text-black text-2xl">Contact</a>
           </li>
         </nav>
       </div>
