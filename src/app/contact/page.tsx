@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import Link from 'next/link';
 import Image from "next/image";
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 import shopbg from "../../../public/shopbg.jpeg"
 import shopicon from "../../../public/shopicon.png"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -125,29 +126,8 @@ export default function page() {
         </div>
       </div>
       </div>
-
-            {/* free delivery line  */}
-            <div className='max-w-full bg-[#fbf3f3] py-10 mt-10'> 
-        <div className='max-w-[120rem] mx-auto py-10 px-10'>
-          <div className='grid grid-cols-1 lg:grid-cols-3 gap-8'>
-            {/* 1st card cols */}
-          <div className='space-y-6'>
-              <h1 className='text-[36px] font-semibold'>Free Delivery</h1>
-              <p className='text-xl text-gray-400'>For all orders over $50, consectetur adipim scing elit</p>
-              </div>
-              {/* 2nd card cols  */}
-              <div className='space-y-6'>
-              <h1 className='text-[36px] font-semibold'>90 Days Return</h1>
-              <p className='text-xl text-gray-400'>if good have problems, consectetur adipim scing elit</p>
-              </div>
-              {/* 3rd card cols  */}
-              <div className='space-y-6'>
-              <h1 className='text-[36px] font-semibold'>Secure Payment</h1>
-              <p className='text-xl text-gray-400'>100% secure payment, consectetur adipim scing elit</p>
-              </div>
-          </div>
-        </div>
-      </div>
+      {/* footer  */}
+      <Footer/>
     </div>
   )
 }

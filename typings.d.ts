@@ -1,10 +1,10 @@
-type productData ={
-    _id: string;
-    name: string;
-    imagePath: string;
-    description: string;
-    price: number;
-    category: string;
-    stockLevel: number;
-    isFeaturedProduct: boolean;
-}
+// type productData ={
+//     _id: string;
+//     name: string;
+//     imagePath: string;
+//     description: string;
+//     price: number;
+//     category: string;
+//     stockLevel: number;
+//     isFeaturedProduct: boolean;
+// }

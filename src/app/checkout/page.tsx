@@ -1,164 +1,241 @@
 "use client";
-import React from 'react'
+import React, { useState } from 'react';
 import Image from "next/image";
-import shopbg from "../../../public/shopbg.jpeg"
-import shopicon from "../../../public/shopicon.png"
+import shopbg from "../../../public/shopbg.jpeg";
+import shopicon from "../../../public/shopicon.png";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleDown, faArrowDown } from '@fortawesome/free-solid-svg-icons';
+import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { useCart } from '../context/CartContext';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
+import Submit from '../officialAction/Submit';
+import Link from 'next/link';
 
 export default function Page() {
     const { cart } = useCart();
 
-  if (cart.length === 0) {
-    return <div className="text-center">Your cart is empty.</div>;
-  };
-  const subtotal = cart.reduce((acc: number, item: { price: number; quantity: number; }) => acc + item.price * item.quantity, 0);
+    const [customerInfo, setCustomerInfo] = useState({
+        firstname:'',
+        lastname:'',
+        companyname:'',
+        countryname:'',
+        streetAddress:'',
+        townCity:'',
+        Province:'',
+        zipCode:'',
+        email:'',
+        phone:'',
+        additionalInfo:'',
+        cash:'',
+        bank:'',
+        })
 
-  return (
-    <div>
-        {/* navbar  */}
-        <Header/>
 
-{/* Shop Hero Section */}
-<div className="max-w-full relative">
-  <Image
-    src={shopbg}
-    alt="bg pic instagram"
-    className="w-full h-[400px] lg:h-[700px] object-cover opacity-25"
-  />
-  <div className="max-w-7xl mx-auto py-6 px-6 lg:px-10">
-    <div className="flex justify-center items-center absolute inset-0">
-      <div className="text-center">
-        <div className="flex justify-center items-center">
-          <Image src={shopicon} alt="shop icon" className="w-16 lg:w-[100px]" />
-        </div>
-        <h1 className="text-3xl lg:text-6xl font-medium">CheckOut</h1>
-        <p className="text-sm lg:text-xl font-semibold py-3 lg:py-5">
-          <span className="font-bold">Home</span> &gt; CheckOut
-        </p>
-      </div>
-    </div>
-  </div>
-</div>
+    if (cart.length === 0) {
+        return <div className="text-center">Your cart is empty.</div>;
+    }
 
-{/* billing section  */}
-<div>
-{cart.map((item:any, index:number)=> (
-      <div key={index}>
-              {/* Blings details left side  */}
-      <div className='max-w-full'>
-        <div className='max-w-7xl mx-auto py-10 px-5 sm:px-8 md:px-10'>
-            <div className='flex flex-col lg:flex-row justify-between items-start'>
-            {/* Billing side  */}
-            <div className='space-y-10 w-full lg:w-1/2 px-5 sm:px-8 lg:px-10 py-10'>
-                <h1 className='text-3xl sm:text-4xl md:text-5xl font-bold mb-5'>Blings Details</h1>
-                <div className='space-x-0 sm:space-x-5 flex flex-col sm:flex-row'>
-                    <div className='space-y-5 w-full sm:w-1/2'>
-                        <label htmlFor="" className='text-lg font-medium block'>First Name</label>
-                        <input type="text" name="" id="user or email" className='border border-gray-400 w-full h-[50px] md:h-[60px] rounded-xl' />
-                    </div>
-                    <div className='space-y-5 w-full sm:w-1/2'>
-                        <label htmlFor="" className='text-lg font-medium block'>Last Name</label>
-                        <input type="text" name="" id="user or email" className='border border-gray-400 w-full h-[50px] md:h-[60px] rounded-xl' />
-                    </div>
-                </div>
-                <div className='space-y-5'>
-                    <label htmlFor="" className='block text-lg font-medium'>Company Name (Optional)</label>
-                    <input type="text" name="" id="password" className='border border-gray-400 w-full md:w-[400px] h-[50px] md:h-[60px] rounded-xl' />
-                </div>
-                <div className='space-y-5'>
-                    <label htmlFor="" className='block text-lg font-medium'>Country / Region</label>
-                    <div className="relative">
-                        <select
-                        id="country"
-                        name="country"
-                        className="block w-full md:w-[400px] h-[50px] md:h-[60px] px-4 py-3 text-gray-700 bg-white border border-gray-400 rounded-xl shadow-sm focus:outline-none focus:ring-2 appearance-none"
-                        >
-                            <option value="sri-lanka">Sri Lanka </option>
-                            <option value="pakistan">Pakistan</option>
-                            <option value="india">India</option>
-                            <option value="bangladesh">Bangladesh</option>
-                        </select>
-                        <div className="absolute inset-y-0 left-[70%] flex items-center pr-4 pointer-events-none">
-                            <FontAwesomeIcon icon={faAngleDown} />
+    const subtotal = cart.reduce((acc: number, item: { price: number; quantity: number; }) => acc + item.price * item.quantity, 0);
+
+    // customer data import from here 
+    // ye work bhi sanity me move hoga name or value k throw 
+    const handleInputChange = (e:any)=>{
+        console.log(e);
+        
+        const {name, value} = e.target
+        setCustomerInfo({...customerInfo,[name]:value})
+    }
+
+        const  handleCheckout =()=>{
+            Submit(cart, customerInfo)
+            // setShowForm(false)
+            // setCart([])
+        }
+
+    return (
+        <div>
+            {/* Navbar */}
+            <Header />
+
+            {/* Shop Hero Section */}
+            <div className="max-w-full relative">
+                <Image
+                    src={shopbg}
+                    alt="Shop Background"
+                    className="w-full h-[400px] lg:h-[700px] object-cover opacity-25"
+                />
+                <div className="max-w-7xl mx-auto py-6 px-6 lg:px-10">
+                    <div className="flex justify-center items-center absolute inset-0">
+                        <div className="text-center">
+                            <div className="flex justify-center items-center">
+                                <Image src={shopicon} alt="Shop Icon" className="w-16 lg:w-[100px]" />
+                            </div>
+                            <h1 className="text-3xl lg:text-6xl font-medium">CheckOut</h1>
+                            <p className="text-sm lg:text-xl font-semibold py-3 lg:py-5">
+                                <span className="font-bold">Home</span> &gt; CheckOut
+                            </p>
                         </div>
                     </div>
                 </div>
-                <div className='space-y-5'>
-                    <label htmlFor="" className='block text-lg font-medium'>Street Address</label>
-                    <input type="text" name="" id="password" className='border border-gray-400 w-full md:w-[400px] h-[50px] md:h-[60px] rounded-xl' />
-                </div>
-                <div className='space-y-5'>
-                    <label htmlFor="" className='block text-lg font-medium'>Town / City</label>
-                    <input type="text" name="" id="password" className='border border-gray-400 w-full md:w-[400px] h-[50px] md:h-[60px] rounded-xl' />
-                </div>
-                <div className='space-y-5'>
-                    <label htmlFor="" className='block text-lg font-medium'>Province</label>
-                    <input type="text" name="" id="password" className='border border-gray-400 w-full md:w-[400px] h-[50px] md:h-[60px] rounded-xl' />
-                </div>
-                <div className='space-y-5'>
-                    <label htmlFor="" className='block text-lg font-medium'>ZIP Code</label>
-                    <input type="text" name="" id="password" className='border border-gray-400 w-full md:w-[400px] h-[50px] md:h-[60px] rounded-xl' />
-                </div>
-                <div className='space-y-5'>
-                    <label htmlFor="" className='block text-lg font-medium'>Phone</label>
-                    <input type="text" name="" id="password" className='border border-gray-400 w-full md:w-[400px] h-[50px] md:h-[60px] rounded-xl' />
-                </div>
-                <div className='space-y-5'>
-                    <label htmlFor="" className='block text-lg font-medium'>Email Address</label>
-                    <input type="text" name="" id="password" className='border border-gray-400 w-full md:w-[400px] h-[50px] md:h-[60px] rounded-xl' />
-                </div>
             </div>
-{/* Register side */}
-<div className='space-y-10 w-full lg:w-1/2 px-5 sm:px-8 lg:px-10 py-10'>
-  <div className='flex justify-center items-center'>
-    <div className='space-x-0 sm:space-x-20 flex flex-col sm:flex-row justify-between items-start sm:items-center w-full'>
-      <div className='space-y-5'>
-        <h1 className='text-lg font-medium'>Product</h1>
-        <p className='text-lg'><span className='text-gray-400'>{item.name}</span> * {item.quantity}</p>
-        <p className='text-lg'>Subtotal</p>
-        <p className='text-lg'>Total</p>
-      </div>
-      <div className='text-left sm:text-right space-y-5 w-full sm:w-auto'>
-        <p className='text-lg font-medium'>Subtotal</p>
-        <p className='text-lg font-medium'>{item.price * item.quantity}.00</p>
-        <p className='text-lg font-medium'>{item.price}.00</p>
-        <p className='text-2xl font-medium text-yellow-600'>{subtotal}.00</p>
-      </div>
-    </div>
-  </div>
-</div>
 
+            {/* Billing Section */}
+            <div>
+                {cart.map((item:any, index:number) => (
+                    <div key={index}>
+                        <div className='max-w-full'>
+                            <div className='max-w-7xl mx-auto py-10 px-5 sm:px-8 md:px-10'>
+                                <div className='flex flex-col lg:flex-row justify-between items-start'>
+                                    {/* Billing Details */}
+                                    <div className='space-y-10 w-full lg:w-1/2 px-5 sm:px-8 lg:px-10 py-10'>
+                                        <h1 className='text-3xl sm:text-4xl md:text-5xl font-bold mb-5'>Billing Details</h1>
+                                        <div className='space-x-0 sm:space-x-5 flex flex-col sm:flex-row'>
+                                            <div className='space-y-5 w-full sm:w-1/2'>
+                                                <label className='text-lg font-medium block'>First Name</label>
+                                                <input type="text" name='firstname' className='border border-gray-400 w-full h-[50px] md:h-[60px] rounded-xl'
+                                                value={customerInfo.firstname}
+                                                onChange={handleInputChange}
+                                                />
+                                            </div>
+                                            <div className='space-y-5 w-full sm:w-1/2'>
+                                                <label className='text-lg font-medium block'>Last Name</label>
+                                                <input type="text" name='lastname' className='border border-gray-400 w-full h-[50px] md:h-[60px] rounded-xl' 
+                                                value={customerInfo.lastname}
+                                                onChange={handleInputChange}
+                                                />
+                                            </div>
+                                        </div>
+                                        <div className='space-y-5'>
+                                            <label className='block text-lg font-medium'>Company Name (Optional)</label>
+                                            <input type="text" name='companyname' className='border border-gray-400 w-full md:w-[400px] h-[50px] md:h-[60px] rounded-xl'
+                                            value={customerInfo.companyname}
+                                            onChange={handleInputChange} />
+                                        </div>
+                                        <div className='space-y-5'>
+                                            <label className='block text-lg font-medium'>Country Name</label>
+                                            <input type="text" name='countryname' className='border border-gray-400 w-full md:w-[400px] h-[50px] md:h-[60px] rounded-xl' 
+                                            value={customerInfo.countryname}
+                                            onChange={handleInputChange}/>
+                                        </div>
+                                        <div className='space-y-5'>
+                                            <label className='block text-lg font-medium'>Street Address</label>
+                                            <input type="text" name='streetAddress' className='border border-gray-400 w-full md:w-[400px] h-[50px] md:h-[60px] rounded-xl' 
+                                            value={customerInfo.streetAddress}
+                                            onChange={handleInputChange}/>
+                                        </div>
+                                        <div className='space-y-5'>
+                                            <label className='block text-lg font-medium'>Town / City</label>
+                                            <input type="text" name='townCity' className='border border-gray-400 w-full md:w-[400px] h-[50px] md:h-[60px] rounded-xl' 
+                                            value={customerInfo.townCity}
+                                            onChange={handleInputChange}/>
+                                        </div>
+                                        <div className='space-y-5'>
+                                            <label className='block text-lg font-medium'>Province</label>
+                                            <input type="text" name='Province' className='border border-gray-400 w-full md:w-[400px] h-[50px] md:h-[60px] rounded-xl' 
+                                            value={customerInfo.Province}
+                                            onChange={handleInputChange}/>
+                                        </div>
+                                        <div className='space-y-5'>
+                                            <label className='block text-lg font-medium'>ZIP Code</label>
+                                            <input type="zipcode" name='zipCode' className='border border-gray-400 w-full md:w-[400px] h-[50px] md:h-[60px] rounded-xl' 
+                                            value={customerInfo.zipCode}
+                                            onChange={handleInputChange}/>
+                                        </div>
+                                        <div className='space-y-5'>
+                                            <label className='block text-lg font-medium'>Phone</label>
+                                            <input type="phone" name='phone' className='border border-gray-400 w-full md:w-[400px] h-[50px] md:h-[60px] rounded-xl' 
+                                            value={customerInfo.phone}
+                                            onChange={handleInputChange}/>
+                                        </div>
+                                        <div className='space-y-5'>
+                                            <label className='block text-lg font-medium'>Email Address</label>
+                                            <input type="email" name='email' className='border border-gray-400 w-full md:w-[400px] h-[50px] md:h-[60px] rounded-xl' 
+                                            value={customerInfo.email}
+                                            onChange={handleInputChange}/>
+                                        </div>
+                                        <div className='space-y-5'>
+                                            <input type="information" name='additionalInfo' className='border border-gray-400 w-full md:w-[400px] h-[50px] md:h-[60px] rounded-xl'
+                                            placeholder='Additional information'
+                                            value={customerInfo.additionalInfo}
+                                                onChange={handleInputChange}
+                                            />
+                                        </div>
+                                    </div>
+
+                                    {/* Order Summary */}
+                                    <div className='space-y-10 w-full lg:w-1/2 px-5 sm:px-8 lg:px-10 py-10'>
+                                        <div className='flex justify-center items-center'>
+                                            <div className='space-x-0 sm:space-x-20 flex flex-col sm:flex-row justify-between items-start sm:items-center w-full'>
+                                                <div className='space-y-5'>
+                                                    <h1 className='text-lg font-medium'>Product</h1>
+                                                    <div className='flex items-center'>
+                                                        <span className='border-b hover:bg-gray-50 transition' key={item._id}/>
+                                                        <Image src={item.imagePath} alt='Product' width="60" height="60" className="w-[60px] h-auto" />
+                                                        <p className='text-lg'><span className='text-gray-400 ml-4'>{item.name}</span> * {item.quantity}</p>
+                                                    </div>
+                                                    <p className='text-lg'>Subtotal</p>
+                                                    <p className='text-lg'>Total</p>
+                                                </div>
+                                                <div className='text-left sm:text-right space-y-5 w-full sm:w-auto'>
+                                                    <p className='text-lg font-medium'>Subtotal</p>
+                                                    <p className='text-lg font-medium'>{item.price * item.quantity}.00</p>
+                                                    <p className='text-lg font-medium'>{item.price}.00</p>
+                                                    <p className='text-2xl font-medium text-yellow-600'>{subtotal}.00</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {/* Payment Methods */}
+                                        <div>
+                                            <div className="flex items-center mb-4">
+                                                <input
+                                                    value={customerInfo.cash}
+                                                    onChange={handleInputChange}
+                                                    id="default-radio-1"
+                                                    type="radio"
+                                                    // nickname="cash"
+                                                    name="default-radio"
+                                                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300"
+                                                />
+                                                <label
+                                                    htmlFor="default-radio-1"
+                                                    className="ms-2 text-lg font-semibold text-gray-900"
+                                                >
+                                                    Direct Bank Transfer
+                                                </label>
+                                            </div>
+                                            <div className='-mt-2 mb-2 text-gray-400'>
+                                                <p>Make your payment directly into our bank account</p>
+                                            </div>
+                                            <div className="flex items-center">
+                                                <input
+                                                    value={customerInfo.bank}
+                                                    onChange={handleInputChange}
+                                                    id="default-radio-2"
+                                                    type="radio"
+                                                    // nickname="bank"
+                                                    name="default-radio"
+                                                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300"
+                                                />
+                                                <label
+                                                    htmlFor="default-radio-2"
+                                                    className="ms-2 text-lg font-semibold text-gray-900"
+                                                >
+                                                    Cash on Delivery
+                                                </label>
+                                            </div>
+                                            <button onClick={handleCheckout} className='w-full border-2 border-black rounded-2xl text-2xl mt-5 font-serif hover:bg-gray-50 transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110'>
+                                                <Link href="/">Place Order</Link>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  ))}
             </div>
-        </div>
-      </div>
-            {/* free delivery line  */}
-            <div className='max-w-full bg-[#fbf3f3] py-10 mt-10'> 
-        <div className='max-w-[120rem] mx-auto py-10 px-10'>
-          <div className='grid grid-cols-1 lg:grid-cols-3 gap-8'>
-            {/* 1st card cols */}
-          <div className='space-y-6'>
-              <h1 className='text-5xl font-semibold'>Free Delivery</h1>
-              <p className='text-3xl text-gray-400'>For all orders over $50, consectetur adipim scing elit</p>
-              </div>
-              {/* 2nd card cols  */}
-              <div className='space-y-6'>
-              <h1 className='text-5xl font-semibold'>90 Days Return</h1>
-              <p className='text-3xl text-gray-400'>if good have problems, consectetur adipim scing elit</p>
-              </div>
-              {/* 3rd card cols  */}
-              <div className='space-y-6'>
-              <h1 className='text-5xl font-semibold'>Secure Payment</h1>
-              <p className='text-3xl text-gray-400'>100% secure payment, consectetur adipim scing elit</p>
-              </div>
+            <Footer/>
           </div>
-        </div>
-      </div>
-      </div>
-    ))}
-</div>
-    </div>
   )
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 // Define Cart Context
 const CartContext = createContext<any>(null);
@@ -8,6 +8,25 @@ const CartContext = createContext<any>(null);
 // Cart Provider Component
 export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   const [cart, setCart] = useState<any[]>([]);
+
+  // Load cart data from localStorage when the component mounts
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const savedCart = localStorage.getItem("cart");
+      console.log("save cart", savedCart);
+      
+      if (savedCart) {
+        setCart(JSON.parse(savedCart));
+      }
+    }
+  }, []);
+
+  // Save cart data to localStorage whenever the cart changes
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      localStorage.setItem("cart", JSON.stringify(cart));
+    }
+  }, [cart]);
 
   // Add to Cart Function
   const addToCart = (product: any, quantity: number) => {
@@ -18,7 +37,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
         // Update quantity if product already exists in cart
         return prev.map((item) =>
           item._id === product._id
-            ? { ...item, quantity: item.quantity }
+            ? { ...item, quantity: item.quantity + quantity }
             : item
         );
       }
