@@ -7,7 +7,13 @@ import manicon1 from "../../../public/searchicon.png";
 import manicon2 from "../../../public/heart icon.png";
 import manicon3 from "../../../public/carticon.png";
 import imageUrlBuilder from "@sanity/image-url"; // Sanity image URL helper
-import ShopProduct from "./ShopProduct";
+import { useRouter } from "next/navigation";
+import { onAuthStateChanged, signOut } from "firebase/auth";
+import { auth, firestore } from "@/firebase/firebase";
+import {doc, getDoc} from 'firebase/firestore';
+import type {User} from 'firebase/auth';
+
+
 
 // Sanity configuration
 const sanityClient = {
@@ -22,6 +28,40 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false); // State for search bar
   const [searchInput, setSearchInput] = useState(""); // State for search input
+  // logount kam 
+  const [loading, setLoading] = useState(true);
+const [user, setUser] = useState<User | null>(null);
+const [userName, setUserName] = useState<string | null>(null);
+const router = useRouter();
+
+useEffect(()=>{
+  const unsubscribe = onAuthStateChanged(auth, async(user)=>{
+      if(user){
+          setUser(user);
+          const userDoc = await getDoc(doc(firestore,"users", user.uid));
+          if(userDoc.exists()){
+              const userData = userDoc.data();
+              setUserName(`${userData.firstName} ${userData.lastName}`);
+          }
+      }else{
+          router.push("/login")
+      }
+      setLoading(false);
+});
+
+//cleanup subscription on unamount
+return() => unsubscribe();
+
+}, [router]);
+const handleLogout = async ()=>{
+  try{
+      await signOut(auth);
+      router.push("/login")
+  }catch(error){
+      console.log("logOut Error", error);
+      
+  };
+};
 
   interface Product {
     imagePath: any;
@@ -141,6 +181,7 @@ const Header = () => {
             </div>
             {/* Icons */}
             <div className="flex items-center space-x-3 md:space-x-10">
+              {/* account icon */}
               <a href="/myaccount">
                 <Image
                   src={manicon}
@@ -163,9 +204,7 @@ const Header = () => {
                       placeholder="Search..."
                       className="w-40 px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-yellow-300"
                       value={searchInput}
-                      onChange={(e) => setSearchInput(e.target.value)}
-                    >
-                        
+                      onChange={(e) => setSearchInput(e.target.value)}>
                     </input>
                       {/* Search Results */}
                       {isSearchOpen && searchInput && (
@@ -197,7 +236,7 @@ const Header = () => {
                   </div>
                 )}
               </div>
-
+                {/* wishlist icon  */}
               <a href="/blogs">
                 <Image
                   src={manicon2}
@@ -205,6 +244,7 @@ const Header = () => {
                   className="w-6 md:w-8 h-6 md:h-8 cursor-pointer"
                 />
               </a>
+              {/* cart icon  */}
               <a href="/cart">
                 <Image
                   src={manicon3}
@@ -212,6 +252,11 @@ const Header = () => {
                   className="w-6 md:w-8 h-6 md:h-8 cursor-pointer"
                 />
               </a>
+              <button 
+                onClick={handleLogout}
+                className="px-4 py-2 bg-bg-[#f6e6b8] text-black font-medium shadow-xl border border-gray-200 rounded-lg hover:bg-[#f0da97]">
+                    Logout
+                </button>
             </div>
           </div>
         </nav>

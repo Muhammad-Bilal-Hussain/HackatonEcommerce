@@ -12,8 +12,7 @@ export const projectId = assertValue(
 )
 
 export const token = assertValue(
-  (process.env.NEXT_PUBLIC_SANITY_TOKEN ||
-    "skQK5AedH3ShJlPkh2Lfc8hDVMFUXsBXDTQr4tUzVuYAm4RierBMJBYrGa3MKZzgjRpTucf3eaymFm7tG15eSN6QBKj8RtrcwVsacmh7wgFIRHt8MNPdhKBlFya1GSAJwJLC71KnyQ9zV0yCZeYrwMH6QsuiYYf7jRfw3nDavFZFkVj2eBVW"),
+  (process.env.NEXT_PUBLIC_SANITY_TOKEN ),
   "Missing environment variable: NEXT_PUBLIC_SANITY_TOKEN"
   );
 

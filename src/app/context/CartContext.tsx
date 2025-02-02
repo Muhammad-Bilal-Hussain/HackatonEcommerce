@@ -37,7 +37,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
         // Update quantity if product already exists in cart
         return prev.map((item) =>
           item._id === product._id
-            ? { ...item, quantity: item.quantity + quantity }
+            ? { ...item, quantity: item.quantity  }
             : item
         );
       }
