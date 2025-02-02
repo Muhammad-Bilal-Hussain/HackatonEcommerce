@@ -1,4 +1,3 @@
-import {ClerkProvider} from '@clerk/nextjs'
 //import { Providers } from "./providers"; // Jo file aapne banayi hai
 import type { Metadata } from "next";
 import localFont from "next/font/local";
