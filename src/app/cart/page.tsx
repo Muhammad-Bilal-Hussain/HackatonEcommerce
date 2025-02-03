@@ -8,6 +8,10 @@ import shopbg from "../../../public/shopbg.jpeg";
 import shopicon from "../../../public/shopicon.png";
 import { useCart } from "../context/CartContext";
 import Footer from "../components/Footer";
+import Swal from 'sweetalert2';
+import { getItemKey } from "sanity";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 export default function Cart() {
   const { cart, removeFromCart } = useCart();
@@ -17,6 +21,35 @@ export default function Cart() {
       acc + item.price * item.quantity,
     0
   );
+
+  const handleCheckout = ()=>{
+    Swal.fire({
+      title: "Good job!",
+      text: "Your Product has been add to Checkout!",
+      icon: "success"
+    });
+  }
+  const handleDelete =(id: string)=>{
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+      cancelButtonText: "Cancel"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        removeFromCart(id); // Yahan ab id pass ho rahi hai
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your item has been removed from the cart.",
+          icon: "success"
+        });
+      }
+    });
+  }
 
   return (
     <div>
@@ -61,29 +94,28 @@ export default function Cart() {
                   </thead>
                   <tbody className="bg-white">
                     <tr className="border-b">
-                      <td className="flex items-center gap-4 py-2">
+                      <td className="flex items-center gap-4 max-sm:mr-4">
                         <Image
                           src={item.imagePath}
                           alt={item.name}
                           width="60"
                           height="60"
-                          className="w-[60px] h-auto"
+                          className="md:w-[60px] max-sm:w-[40px] h-auto "
                         />
-                        <span className="font-medium">{item.name}</span>
+                        <span className="md:font-medium max-sm:font-[200px] max-sm:mr-4">{item.name}</span>
                       </td>
-                      <td className="text-center py-2">
-                        <p className="text-gray-800 text-base border border-gray-400 rounded-lg w-[40px] h-[40px] flex justify-center items-center sm:text-lg">
+                      <td className="text-center py-2 max-sm:px-4">
+                        <p className="text-gray-800 md:text-base border border-gray-400 rounded-lg max-sm:rounded-md max-sm:w-[20px] max-sm:h-[20px] flex justify-center items-center max-sm:text-sm">
                           {item.quantity}
                         </p>
                       </td>
-                      <td className="text-right py-2">Rs. {item.price * item.quantity}.00</td>
+                      <td className="text-right md:py-2 max-sm:px-2">Rs. {item.price * item.quantity}.00</td>
                       <td className="text-center py-2">
-                        <button
-                          className="px-4 py-1 text-sm text-white bg-red-500 hover:bg-red-600 rounded"
-                          onClick={() => removeFromCart(item._id)}
-                        >
-                          Delete
-                        </button>
+                      <FontAwesomeIcon
+                      icon={faTrash}
+                      className="px-4 py-1 text-xl max-sm:text-sm text-red-500 hover:text-red-600 "
+                      onClick={() => handleDelete(item._id)}
+                      />
                       </td>
                     </tr>
                   </tbody>
@@ -101,7 +133,7 @@ export default function Cart() {
                   <span className="text-gray-600">Total</span>
                   <span className="text-yellow-600 font-bold">Rs. {subtotal}.00</span>
                 </div>
-                <button className="w-full text-black mt-4 px-4 py-2 border-2 border-black hover:font-bold font-medium rounded-3xl">
+                <button onClick={handleCheckout} className="w-full text-black mt-4 px-4 py-2 border-2 border-black hover:font-bold font-medium rounded-3xl">
                   <Link href="/checkout">Check Out</Link>
                 </button>
               </div>

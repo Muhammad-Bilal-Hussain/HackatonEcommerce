@@ -237,7 +237,7 @@ const handleLogout = async ()=>{
                 )}
               </div>
                 {/* wishlist icon  */}
-              <a href="/blogs">
+              <a href="/wishList">
                 <Image
                   src={manicon2}
                   alt="blogs"

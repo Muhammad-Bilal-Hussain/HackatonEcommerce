@@ -10,6 +10,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Submit from '../officialAction/Submit';
 import Link from 'next/link';
+import Swal from 'sweetalert2';
 
 export default function Page() {
     const { cart } = useCart();
@@ -50,6 +51,11 @@ export default function Page() {
             Submit(cart, customerInfo)
             // setShowForm(false)
             // setCart([])
+          Swal.fire({
+            title: "Good job!",
+            text: "successfully Order Place In Sanity!",
+            icon: "success"
+        });
         }
 
     return (
@@ -95,6 +101,7 @@ export default function Page() {
                                                 <input type="text" name='firstname' className='border border-gray-400 w-full h-[50px] md:h-[60px] rounded-xl'
                                                 value={customerInfo.firstname}
                                                 onChange={handleInputChange}
+                                                required
                                                 />
                                             </div>
                                             <div className='space-y-5 w-full sm:w-1/2'>
@@ -102,6 +109,7 @@ export default function Page() {
                                                 <input type="text" name='lastname' className='border border-gray-400 w-full h-[50px] md:h-[60px] rounded-xl' 
                                                 value={customerInfo.lastname}
                                                 onChange={handleInputChange}
+                                                required
                                                 />
                                             </div>
                                         </div>
@@ -109,56 +117,56 @@ export default function Page() {
                                             <label className='block text-lg font-medium'>Company Name (Optional)</label>
                                             <input type="text" name='companyname' className='border border-gray-400 w-full md:w-[400px] h-[50px] md:h-[60px] rounded-xl'
                                             value={customerInfo.companyname}
-                                            onChange={handleInputChange} />
+                                            onChange={handleInputChange} required />
                                         </div>
                                         <div className='space-y-5'>
                                             <label className='block text-lg font-medium'>Country Name</label>
                                             <input type="text" name='countryname' className='border border-gray-400 w-full md:w-[400px] h-[50px] md:h-[60px] rounded-xl' 
                                             value={customerInfo.countryname}
-                                            onChange={handleInputChange}/>
+                                            onChange={handleInputChange} required/>
                                         </div>
                                         <div className='space-y-5'>
                                             <label className='block text-lg font-medium'>Street Address</label>
                                             <input type="text" name='streetAddress' className='border border-gray-400 w-full md:w-[400px] h-[50px] md:h-[60px] rounded-xl' 
                                             value={customerInfo.streetAddress}
-                                            onChange={handleInputChange}/>
+                                            onChange={handleInputChange} required/>
                                         </div>
                                         <div className='space-y-5'>
                                             <label className='block text-lg font-medium'>Town / City</label>
                                             <input type="text" name='townCity' className='border border-gray-400 w-full md:w-[400px] h-[50px] md:h-[60px] rounded-xl' 
                                             value={customerInfo.townCity}
-                                            onChange={handleInputChange}/>
+                                            onChange={handleInputChange} required/>
                                         </div>
                                         <div className='space-y-5'>
                                             <label className='block text-lg font-medium'>Province</label>
                                             <input type="text" name='Province' className='border border-gray-400 w-full md:w-[400px] h-[50px] md:h-[60px] rounded-xl' 
                                             value={customerInfo.Province}
-                                            onChange={handleInputChange}/>
+                                            onChange={handleInputChange} required/>
                                         </div>
                                         <div className='space-y-5'>
                                             <label className='block text-lg font-medium'>ZIP Code</label>
                                             <input type="zipcode" name='zipCode' className='border border-gray-400 w-full md:w-[400px] h-[50px] md:h-[60px] rounded-xl' 
                                             value={customerInfo.zipCode}
-                                            onChange={handleInputChange}/>
+                                            onChange={handleInputChange} required/>
                                         </div>
                                         <div className='space-y-5'>
                                             <label className='block text-lg font-medium'>Phone</label>
                                             <input type="phone" name='phone' className='border border-gray-400 w-full md:w-[400px] h-[50px] md:h-[60px] rounded-xl' 
                                             value={customerInfo.phone}
-                                            onChange={handleInputChange}/>
+                                            onChange={handleInputChange} required/>
                                         </div>
                                         <div className='space-y-5'>
                                             <label className='block text-lg font-medium'>Email Address</label>
                                             <input type="email" name='email' className='border border-gray-400 w-full md:w-[400px] h-[50px] md:h-[60px] rounded-xl' 
                                             value={customerInfo.email}
-                                            onChange={handleInputChange}/>
+                                            onChange={handleInputChange} required/>
                                         </div>
                                         <div className='space-y-5'>
-                                            <input type="information" name='additionalInfo' className='border border-gray-400 w-full md:w-[400px] h-[50px] md:h-[60px] rounded-xl'
+                                            <input type="information" name='additionalInfo' className='border border-gray-400 w-full md:w-[400px] h-[50px] md:h-[60px] rounded-xl p-6'
                                             placeholder='Additional information'
                                             value={customerInfo.additionalInfo}
                                                 onChange={handleInputChange}
-                                            />
+                                                required/>
                                         </div>
                                     </div>
 
@@ -171,7 +179,7 @@ export default function Page() {
                                                     <div className='flex items-center'>
                                                         <span className='border-b hover:bg-gray-50 transition' key={item._id}/>
                                                         <Image src={item.imagePath} alt='Product' width="60" height="60" className="w-[60px] h-auto" />
-                                                        <p className='text-lg'><span className='text-gray-400 ml-4'>{item.name}</span> * {item.quantity}</p>
+                                                        <p className='text-lg'><span className='text-gray-400 ml-4'>{item.name}</span> x {item.quantity}</p>
                                                     </div>
                                                     <p className='text-lg'>Subtotal</p>
                                                     <p className='text-lg'>Total</p>
@@ -196,7 +204,7 @@ export default function Page() {
                                                     // nickname="cash"
                                                     name="default-radio"
                                                     className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300"
-                                                />
+                                                required/>
                                                 <label
                                                     htmlFor="default-radio-1"
                                                     className="ms-2 text-lg font-semibold text-gray-900"
@@ -209,6 +217,7 @@ export default function Page() {
                                             </div>
                                             <div className="flex items-center">
                                                 <input
+                                                    required
                                                     value={customerInfo.bank}
                                                     onChange={handleInputChange}
                                                     id="default-radio-2"

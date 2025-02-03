@@ -1,6 +1,33 @@
-import React from 'react'
+"use client"
+import { useState } from "react";
+import React from 'react';
+import Swal from 'sweetalert2';
 
-function footer() {
+function Footer() {
+  const [email, setEmail] = useState("");
+
+  const handleSubscribe = () => {
+    if (email) {
+      console.log("Subscribed Email:", email);
+      localStorage.setItem("newsletterEmail", email);
+      // alert("Subscribed successfully!");
+      Swal.fire({
+        title: "Good job!",
+        text: "Subscribed successfully!",
+        icon: "success"
+      });
+      setEmail("");
+    } else {
+      // alert("Please enter a valid email.");
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Please enter a valid email!",
+        // footer: '<a href="#">Why do I have this issue?</a>'
+      });
+    }
+  };
+
   return (
     <div>
             {/* Free Delivery Section */}
@@ -91,16 +118,18 @@ function footer() {
       {/* Input Field */}
       <div className="relative w-full sm:w-auto xl:mr-4 lg:mr-4 sm:mr-4 mr-0">
         <input
-          type="text"
-          id="footer-field"
+          type="email"
+          id="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
           name="footer-field"
           className="w-full sm:w-[200px] rounded border-b-2 border-black text-base py-2 leading-8 focus:outline-none"
           placeholder="Enter Your Email Address"
         />
       </div>
       {/* Button */}
-      <button className="w-full sm:w-auto flex-shrink-0 inline-flex border-b-2 border-black py-2 px-6 focus:outline-none rounded text-[20px]">
-        Button
+      <button onClick={handleSubscribe} className="w-full sm:w-auto flex-shrink-0 inline-flex border-b-2 border-black py-2 px-6 focus:outline-none rounded text-[20px]">
+        Submit
       </button>
     </div>
   </nav>
@@ -127,4 +156,4 @@ function footer() {
   )
 }
 
-export default footer
+export default Footer;

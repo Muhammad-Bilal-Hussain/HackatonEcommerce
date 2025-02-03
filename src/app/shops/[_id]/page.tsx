@@ -11,6 +11,8 @@ import Footer from "@/app/components/Footer";
 import Link from "next/link";
 import Image from "next/image";
 import ShopProduct from "@/app/components/ShopProduct";
+import Swal from 'sweetalert2';
+
 interface Product {
   _id: string;
   name: string;
@@ -48,10 +50,17 @@ export default function Page({ params: { _id } }: { params: { _id: string } }) {
 
   const handleAddToCart = () => {
     addToCart(data, count);
+    Swal.fire({
+    title: "Good job!",
+    text: "Product successfully Add To Cart!",
+    icon: "success"
+  });
   };
 
   const handleIncrement = () => setCount((prevCount) => prevCount + 1);
   const handleDecrement = () => setCount((prevCount) => (prevCount > 0 ? prevCount - 1 : 0));
+
+
 
   return (
     <div>
