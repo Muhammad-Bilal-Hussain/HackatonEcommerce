@@ -8,6 +8,7 @@ import {
     signInWithPopup,
   } from "firebase/auth";   
   import { auth } from "@/firebase/firebase";
+import Link from "next/link";
 
   const SignIn=()=>{
     const [firstName, setFirstName] = useState("");
@@ -94,7 +95,7 @@ import {
   return(
     <div>
         <div className="bg-gray-to-b from gray-600 to-black justify-center items-center h-screen w-screen flex flex-col relative">
-            <h2 className="text-2xl font-bold text-center mb-10 ">Sign Up</h2>
+            <h2 className="text-2xl font-bold text-center mb-10 ">Registeration</h2>
             <div className="p-5 border border-gray-300 rounded">
                 <form onSubmit={handleSignIn} className="space-y-6 px-6 pb-4">
                     <div className="flex space-x-4">
@@ -127,7 +128,7 @@ import {
                           value={gender}
                           onChange={(e) => setGender(e.target.value)}
                           required
-                          className="w-full h-8 sm:h-14 lg:h-16 p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+                          className="w-full h-16 sm:h-14 lg:h-16 p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
                         >
                           <option value="">Select Gender</option>
                           <option value="male">Male</option>
@@ -195,8 +196,10 @@ import {
                     {message && <p className="text-green-500 text-sm">{message}</p>}
                     <button type="submit"
                     className="w-full flex justify-center items-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700">
-                        Sign Up
+                        Register
                     </button>
+                    <Link href={"/login"} className="text-blue-700 hover:underline">Already have an Account?
+                </Link>
                 </form>
             </div>
         </div>

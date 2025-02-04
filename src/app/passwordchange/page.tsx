@@ -72,7 +72,7 @@ const PasswordChange =()=>{
                     onChange={(e) => setCurrentPassword(e.target.value)}
                     required
                     className="w-full h-10 sm:h-12 lg:h-12 p-3 border border-gray-300 rounded-md "
-                    placeholder="Email Address"
+                    placeholder="Current Password"
                   />
                     </div>
                         {/* new password  */}

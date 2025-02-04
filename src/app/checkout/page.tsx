@@ -3,8 +3,6 @@ import React, { useState } from 'react';
 import Image from "next/image";
 import shopbg from "../../../public/shopbg.jpeg";
 import shopicon from "../../../public/shopicon.png";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { useCart } from '../context/CartContext';
 import Header from '../components/Header';
 import Footer from '../components/Footer';

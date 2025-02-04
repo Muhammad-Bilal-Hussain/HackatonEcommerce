@@ -1,6 +1,4 @@
 "use client";
-
-import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import Header from "../components/Header";
@@ -9,7 +7,6 @@ import shopicon from "../../../public/shopicon.png";
 import { useCart } from "../context/CartContext";
 import Footer from "../components/Footer";
 import Swal from 'sweetalert2';
-import { getItemKey } from "sanity";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 

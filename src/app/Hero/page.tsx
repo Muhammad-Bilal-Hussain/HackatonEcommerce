@@ -214,7 +214,7 @@ const Hero: React.FC = () => {
               <div className="text-center lg:text-left">
                 <h2 className="text-xl md:text-2xl font-bold ">New Arrivals</h2>
                 <h1 className="text-3xl md:text-5xl font-bold mt-2">{productImage.length > 0 ? productImage[8].name : ''}</h1>
-                <button className="bg-[#f9edd3] text-black border border-black text-center text-lg md:text-[25px] w-[150px] md:w-[200px] h-[40px] md:h-[50px] mt-6">
+                <button className="bg-[#f9edd3] rounded-xl text-black border border-black text-center text-lg md:text-[25px] w-[150px] md:w-[200px] h-[40px] md:h-[50px] mt-6 transition-transform transform hover:scale-105">
                   <a href={`/shops/${productImage.length > 0 ? productImage[8]._id : ''}`}>Order Now</a>
                 </button>
               </div>

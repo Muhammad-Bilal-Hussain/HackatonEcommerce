@@ -56,7 +56,7 @@ function Login(){
     if (error instanceof Error) {
         setError(error.message);
       } else {
-        setError("An unknown error occurred. Please try again.");
+        setError("Email Issue. Please try again.");
       } 
     }
 };
@@ -91,7 +91,7 @@ const handleChangePassword =()=>{
 return(
     <div>
         <div className="bg-gradient-to-b from-[#f6e6b8] to-block justify-center items-center h-screen w-screen flex flex-col relative">
-            <h2 className="text-4xl font-medium text-black mb-10">Furniture E-Commerce</h2>
+            <h2 className="text-4xl font-medium text-black text-center mb-10">Furniture E-Commerce</h2>
             <div className="p-5 border border-gray-300 rounded">
             <form onSubmit={handleLogin} className="space-y-6 px-6 pb-4">
                         {/* email  */}
@@ -131,11 +131,11 @@ return(
                         />
                         </div>
                     {error && <p className="text-red-500 text-sm">{error}</p>}
-                    <button 
+                    <p 
                     onClick={handleChangePassword}
                     className="px-4  text-blue-700 rounded-md hover:text-red-700">
                     Change Password
-                    </button>
+                    </p>
                     <button type="submit"
                     className="w-full flex justify-center items-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-black bg-[#f6e6b8] hover:bg-[#f0da97]">
                         Log In
@@ -143,7 +143,7 @@ return(
                 </form>
             <p className="text-sm font-medium text-black space-y-6 px-6 pb-4">
                 Don&apos;t have an account?{" "}
-                <Link href={"/signIn"} className="text-blue-700 hover:underline">Sign In Here
+                <Link href={"/signIn"} className="text-blue-700 hover:underline">Register Here
                 </Link>
             </p>
             </div>

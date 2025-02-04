@@ -252,6 +252,7 @@ const handleLogout = async ()=>{
                   className="w-6 md:w-8 h-6 md:h-8 cursor-pointer"
                 />
               </a>
+              {/* Logout button  */}
               <button 
                 onClick={handleLogout}
                 className="px-4 py-2 bg-bg-[#f6e6b8] text-black font-medium shadow-xl border border-gray-200 rounded-lg hover:bg-[#f0da97]">
