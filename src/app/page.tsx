@@ -6,7 +6,6 @@ import { auth, firestore } from "@/firebase/firebase";
 import {doc, getDoc, setDoc} from 'firebase/firestore';
 import {User} from 'firebase/auth';
 import React from "react";
-import Hero from "./components/Hero";
 
 const Home=()=> {
   const [loading, setLoading] = useState(true);

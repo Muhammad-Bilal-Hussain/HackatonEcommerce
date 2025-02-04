@@ -1,12 +1,9 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-// import herosofa from "../../../public/herosofa.png";
-import sofa1 from "../../../public/sofa1.jpg";
 import cardsofa1 from "../../../public/cardsofa1.jpg";
 import cardsofa2 from "../../../public/cardsofa2.jpg";
 import cardsofa3 from "../../../public/cardsofa3.jpg";
-import newarrival from "../../../public/new arival sofa.jpg";
 import watchicon from "../../../public/watchicon.jpg";
 import calndericon from "../../../public/calendericon.jpg";
 import bgpic from "../../../public/intagrambg pic.jpg";
