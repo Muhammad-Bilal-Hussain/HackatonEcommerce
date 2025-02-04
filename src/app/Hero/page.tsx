@@ -59,11 +59,11 @@ const Hero: React.FC = () => {
           <section className="flex flex-col md:flex-row items-center justify-between md:mt-[100px] max-sm:mt-[228px] w-full px-4 space-y-6 md:space-y-0">
             {/* Text Content */}
             <div className="text-center md:text-left space-y-4">
-              <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold text-gray-800 leading-tight">
-                Rocket Single <br /> Seater
+            <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold text-gray-800 leading-tight">
+              {productImage.length > 0 ? productImage[15].name : ''}
               </h1>
               <a
-                href="/shop"
+                href={`/shops/${productImage.length > 0 ? productImage[15]._id : ''}`}
                 className="inline-block text-xl md:text-2xl font-medium text-gray-800 underline hover:text-black"
               >
                 Shop Now
