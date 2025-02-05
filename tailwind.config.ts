@@ -59,7 +59,7 @@ const config: Config = {
   	},
   	screens: {
   		'max-sm': {max: '480px'},
-  		'sm': '481px',
+  		'sm': '480px',
   		'md': '640px',
   		'lg': '780px',
   		'xl': '892px',

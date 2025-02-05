@@ -163,11 +163,11 @@ export default function Page({ params: { _id } }: { params: { _id: string } }) {
             </div>
         {/* description row  */}
         <p className="border-t-2 border-gray-400"></p>
-        <div className=" flex mt-5 justify-center">
+        <div className=" flex mt-5 justify-center sm:space-x-3 md:space-x-3">
       {/* Tabs */}
       <div className=" max-w-7xl">
-        <div className="space-y-5">
-          <div className="space-x-5 flex text-xl justify-center items-center">
+        <div className="space-y-5 sm:space-x-3 md:space-x-3">
+          <div className="space-x-5 flex text-xl justify-center items-center sm:space-x-3 md:space-x-3">
             <button
               className={`${
                 activeTab === "description" ? "text-gray-800" : "text-gray-400"
@@ -195,7 +195,7 @@ export default function Page({ params: { _id } }: { params: { _id: string } }) {
           </div>
 
           {/* Dynamic Content */}
-          <div className="space-y-5">
+          <div className="space-y-5 sm:space-x-3 md:space-x-3">
             {activeTab === "description" && (
               <div>
                 <p className="text-gray-400">
@@ -215,7 +215,7 @@ export default function Page({ params: { _id } }: { params: { _id: string } }) {
               </div>
             )}
             {activeTab === "additionalInfo" && (
-              <div>
+              <div className="sm:space-x-3 md:space-x-3">
                 <p className="text-gray-400">Weight: 3.0 kg</p>
                 <p className="text-gray-400">Dimensions: 30 cm x 15 cm x 20 cm</p>
                 <p className="text-gray-400">Color: Black</p>
@@ -223,7 +223,7 @@ export default function Page({ params: { _id } }: { params: { _id: string } }) {
               </div>
             )}
             {activeTab === "reviews" && (
-              <div>
+              <div className="sm:space-x-3 md:space-x-3">
                 <p className="text-gray-400">
                   1. Great product! The sound quality is amazing. - John Doe
                 </p>

@@ -146,7 +146,7 @@ const handleLogout = async ()=>{
               <ul
                 className={`${
                   isMenuOpen ? "block" : "hidden"
-                } absolute md:static top-16 left-0 w-full md:w-auto md:flex bg-[#f6e6b8] md:bg-transparent space-y-4 md:space-y-0 md:space-x-8 text-center md:text-left px-4 py-6 md:py-0`}
+                } absolute md:static top-16 left-0 w-full md:w-auto md:flex bg-white md:bg-transparent space-y-4 md:space-y-0 md:space-x-8 text-center md:text-left px-4 py-6 md:py-0`}
               >
                 <li>
                   <a href="/" className="text-lg font-semibold hover:text-black">

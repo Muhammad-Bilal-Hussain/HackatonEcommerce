@@ -94,7 +94,7 @@ import Link from "next/link";
 
   return(
     <div>
-        <div className="bg-gray-to-b from gray-600 to-black justify-center items-center h-screen w-screen flex flex-col relative">
+        <div className="bg-gradient-to-b from-[#f6e6b8] to-block justify-center items-center h-screen w-screen flex flex-col relative">
             <h2 className="text-2xl font-bold text-center mb-10 ">Registeration</h2>
             <div className="p-5 border border-gray-300 rounded">
                 <form onSubmit={handleSignIn} className="space-y-6 px-6 pb-4">
