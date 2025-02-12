@@ -17,6 +17,7 @@ interface Product {
   name: string;
   imagePath: string; // Assume imagePath is a valid URL string
   description: string;
+  quantity: number;
   price: number;
   rating: number;
   category: string;

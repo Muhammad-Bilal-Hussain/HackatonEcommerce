@@ -7,6 +7,8 @@ import manicon1 from "../../../public/searchicon.png";
 import manicon2 from "../../../public/heart icon.png";
 import manicon3 from "../../../public/carticon.png";
 import imageUrlBuilder from "@sanity/image-url"; // Sanity image URL helper
+import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
+import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import { useRouter } from "next/navigation";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth, firestore } from "@/firebase/firebase";
@@ -28,40 +30,41 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false); // State for search bar
   const [searchInput, setSearchInput] = useState(""); // State for search input
+  const [user, setUser] = useState<User | null>(null); //user image ke lie 
   // logount kam 
-  const [loading, setLoading] = useState(true);
-const [user, setUser] = useState<User | null>(null);
-const [userName, setUserName] = useState<string | null>(null);
-const router = useRouter();
+//   const [loading, setLoading] = useState(true);
+// const [user, setUser] = useState<User | null>(null);
+// const [userName, setUserName] = useState<string | null>(null);
+// const router = useRouter();
 
-useEffect(()=>{
-  const unsubscribe = onAuthStateChanged(auth, async(user)=>{
-      if(user){
-          setUser(user);
-          const userDoc = await getDoc(doc(firestore,"users", user.uid));
-          if(userDoc.exists()){
-              const userData = userDoc.data();
-              setUserName(`${userData.firstName} ${userData.lastName}`);
-          }
-      }else{
-          router.push("/login")
-      }
-      setLoading(false);
-});
+// useEffect(()=>{
+//   const unsubscribe = onAuthStateChanged(auth, async(user)=>{
+//       if(user){
+//           setUser(user);
+//           const userDoc = await getDoc(doc(firestore,"users", user.uid));
+//           if(userDoc.exists()){
+//               const userData = userDoc.data();
+//               setUserName(`${userData.firstName} ${userData.lastName}`);
+//           }
+//       }else{
+//           router.push("/login")
+//       }
+//       setLoading(false);
+// });
 
-//cleanup subscription on unamount
-return() => unsubscribe();
+// //cleanup subscription on unamount
+// return() => unsubscribe();
 
-}, [router]);
-const handleLogout = async ()=>{
-  try{
-      await signOut(auth);
-      router.push("/login")
-  }catch(error){
-      console.log("logOut Error", error);
+// }, [router]);
+// const handleLogout = async ()=>{
+//   try{
+//       await signOut(auth);
+//       router.push("/login")
+//   }catch(error){
+//       console.log("logOut Error", error);
       
-  };
-};
+//   };
+// };
 
   interface Product {
     imagePath: any;
@@ -126,6 +129,25 @@ const handleLogout = async ()=>{
   const toggleSearch = () => {
     setIsSearchOpen(!isSearchOpen);
   };
+  // dropdown ka kam 
+  const [isOpen, setIsOpen] = useState(false);
+
+
+
+  //image ka kam
+  // Check if user is logged in
+useEffect(() => {
+  const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+    setUser(currentUser);
+  });
+  return () => unsubscribe();
+}, []);
+
+const handleLogout = async () => {
+  await signOut(auth);
+  setUser(null);
+};
+//img kam khtm
 
   return (
 <div>
@@ -182,7 +204,7 @@ const handleLogout = async ()=>{
             {/* Icons */}
             <div className="flex items-center space-x-3 md:space-x-10">
               {/* account icon */}
-              <a href="/myaccount">
+              <a href="/signIn">
                 <Image
                   src={manicon}
                   alt="myaccount"
@@ -202,13 +224,13 @@ const handleLogout = async ()=>{
                     <input
                       type="text"
                       placeholder="Search..."
-                      className="w-40 px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-yellow-300"
+                      className="w-40 px-2 py-1 border border-gray-300 rounded-md focus:outline-none"
                       value={searchInput}
                       onChange={(e) => setSearchInput(e.target.value)}>
                     </input>
                       {/* Search Results */}
                       {isSearchOpen && searchInput && (
-                      <div className="w-[280px] mx-auto h-[300px] overflow-auto lg:fixed max-sm:bg-white">
+                      <div className="w-[280px] mx-auto h-[300px] overflow-auto lg:fixed bg-white">
                         {filteredProducts.length > 0 ? (
                           <div className="">
                             {filteredProducts.map((product) => (
@@ -252,12 +274,48 @@ const handleLogout = async ()=>{
                   className="w-6 md:w-8 h-6 md:h-8 cursor-pointer"
                 />
               </a>
-              {/* Logout button  */}
-              <button 
-                onClick={handleLogout}
-                className="px-4 py-2 bg-bg-[#f6e6b8] text-black font-medium shadow-xl border border-gray-200 rounded-lg hover:bg-[#f0da97]">
-                    Logout
-                </button>
+              {/* options dropdown  */}
+              <div className="relative inline-block text-left">
+                {user ? (
+                  <div className="flex items-center space-x-2">
+                    {/* Profile Picture */}
+                    <Image
+                      src={user?.photoURL?.replace("=s96-c", "=s400-c") || "/default-profile.png"}
+                      alt="Profile"
+                      width={100}
+                      height={100}
+                      className="w-10 h-10 rounded-full cursor-pointer"
+                      onClick={() => setIsOpen(!isOpen)}
+                    />
+                    {/* <button
+                      onClick={() => setIsOpen(!isOpen)}
+                      className="inline-flex justify-center rounded-md bg-transparent px-3 py-2 text-sm font-semibold text-black"
+                    >
+                      <ChevronDownIcon aria-hidden="true" className="-mr-1 size-5 text-black" />
+                    </button> */}
+                  </div>
+                ) : (
+                  <a href="/login" className="text-lg font-medium text-gray-700 hover:text-xl hover:font-bold transition-transform transform hover:scale-105">
+                    Log In
+                  </a>
+                )}
+
+                {isOpen && user && (
+                  <div className="absolute mt-2 w-36 rounded-md bg-white shadow-lg">
+                    <div className="py-1">
+                      <a href="/passwordchange" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                        Account Settings
+                      </a>
+                      <button
+                        onClick={handleLogout}
+                        className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      >
+                        Log Out
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </nav>

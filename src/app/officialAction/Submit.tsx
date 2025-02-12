@@ -2,10 +2,10 @@ import { client } from "@/sanity/lib/client";
 import React from "react";
 
 interface Customer {
-  email: string;
-  phone: string;
   firstname: string;
   lastname: string;
+  email: string;
+  phone: string;
   companyname: string;
   countryname: string;
   streetAddress: string;
@@ -22,10 +22,10 @@ const createCustomerInSanity = async (customerInfo: Customer) => {
   try {
     const customerObject = {
       _type: "customer",
-      email: customerInfo.email,
-      phone: customerInfo.phone,
       firstname: customerInfo.firstname,
       lastname: customerInfo.lastname,
+      email: customerInfo.email,
+      phone: customerInfo.phone,
       companyname: customerInfo.companyname,
       countryname: customerInfo.countryname,
       streetAddress: customerInfo.streetAddress,
@@ -56,17 +56,17 @@ const createOrderInSanity = async (
         _ref: customer_id,
       },
       item: cartData.map((item: productData) => ({
-        _type: "item",
+    _type: "item",
         _id: item._id,
         product_name: item.name,
         product_description: item.description,
+        product_quantity: item.quantity,
         product_price: item.price,
         product_category: item.category,
       })),
       order_date: new Date().toISOString(),
     };
     const response = await client.create(orderObject);
-    // client.delete()
     console.log("Order created in sanity", response);
     return response;
   } catch (error) {

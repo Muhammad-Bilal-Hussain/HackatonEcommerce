@@ -29,6 +29,11 @@ const order= {
                 type: 'string'
               },
               {
+                name: 'product_quantity',
+                title: 'Product Quantity',
+                type: 'number',
+              },
+              {
                 name: 'product_price',
                 title: 'Product Price',
                 type: 'number'

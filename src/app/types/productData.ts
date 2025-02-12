@@ -3,6 +3,7 @@ interface productData {
     name: string;
     imagePath: string;
     description: string;
+    quantity: number;
     price: number;
     rating: number,
     category: string;

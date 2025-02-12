@@ -8,7 +8,10 @@ import {
     signInWithPopup,
   } from "firebase/auth";   
   import { auth } from "@/firebase/firebase";
+  import { getFirestore, doc, setDoc } from "firebase/firestore";
 import Link from "next/link";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 
   const SignIn=()=>{
     const [firstName, setFirstName] = useState("");
@@ -20,7 +23,7 @@ import Link from "next/link";
     const [error, setError] = useState<string | null>(null);
     const [message, setMessage] = useState<string | null>(null);
     const router = useRouter();
-
+    const db = getFirestore();
 
     const handleSignIn = async (event: FormEvent) => {
         event.preventDefault();
@@ -33,6 +36,7 @@ import Link from "next/link";
           }
 
           try {
+            //user authentication
             const userCredential = await createUserWithEmailAndPassword(
               auth,
               email,
@@ -41,6 +45,14 @@ import Link from "next/link";
             const user = userCredential.user;
             await sendEmailVerification(user);
 
+          // Store additional user data in Firestore
+          await setDoc(doc(db, "users", user.uid), {
+          firstName: firstName,
+          lastName: lastName,
+          gender: gender,
+          email: email,
+          uid: user.uid
+      });
             // Temporarily store user data in local storage
         localStorage.setItem(
         "registrationData",
@@ -82,7 +94,7 @@ import Link from "next/link";
       );
 
       // setMessage("Google Sign-In Successful! Redirecting...");
-      // router.push("/dashboard");
+      router.push("/Hero");
     } catch (error) {
       if (error instanceof Error) {
         setError(error.message);
@@ -94,8 +106,10 @@ import Link from "next/link";
 
   return(
     <div>
-        <div className="bg-gradient-to-b from-[#f6e6b8] to-block justify-center items-center h-screen w-screen flex flex-col relative">
-            <h2 className="text-2xl font-bold text-center mb-10 ">Registeration</h2>
+      <div className="flex justify-around items-center">
+        {/* register work */}
+      <div className="justify-center items-center h-screen w-screen flex flex-col relative">
+            <h2 className="text-3xl font-black text-center mb-10 ">Registeration</h2>
             <div className="p-5 border border-gray-300 rounded">
                 <form onSubmit={handleSignIn} className="space-y-6 px-6 pb-4">
                     <div className="flex space-x-4">
@@ -106,7 +120,7 @@ import Link from "next/link";
                         value={firstName}
                         onChange={(e)=> setFirstName(e.target.value)}
                         required
-                        className="w-full h-12 sm:h-14 lg:h-16 p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+                        className="w-full h-12 sm:h-14 lg:h-16 p-3 border border-gray-300 rounded-md"
                   placeholder="Enter Your First Name"/>
                         </div>
                         {/* last name  */}
@@ -116,7 +130,7 @@ import Link from "next/link";
                         value={lastName}
                         onChange={(e)=> setLastName(e.target.value)}
                         required
-                        className="w-full h-12 sm:h-14 lg:h-16 p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+                        className="w-full h-12 sm:h-14 lg:h-16 p-3 border border-gray-300 rounded-md"
                   placeholder="Enter Your Last Name"/>
                         </div>
                     </div>
@@ -128,7 +142,7 @@ import Link from "next/link";
                           value={gender}
                           onChange={(e) => setGender(e.target.value)}
                           required
-                          className="w-full h-16 sm:h-14 lg:h-16 p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+                          className="w-full h-16 sm:h-14 lg:h-16 p-3 border border-gray-300 rounded-md"
                         >
                           <option value="">Select Gender</option>
                           <option value="male">Male</option>
@@ -150,7 +164,7 @@ import Link from "next/link";
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
-                    className="w-full h-12 sm:h-14 lg:h-16 p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+                    className="w-full h-12 sm:h-14 lg:h-16 p-3 border border-gray-300 rounded-md"
                     placeholder="Email Address"
                   />
                     </div>
@@ -169,7 +183,7 @@ import Link from "next/link";
                           value={password}
                           onChange={(e) => setPassword(e.target.value)}
                           required
-                          className="w-full h-12 sm:h-14 lg:h-16 p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+                          className="w-full h-12 sm:h-14 lg:h-16 p-3 border border-gray-300 rounded-md"
                           placeholder="Enter Password"
                         />
                         </div>
@@ -187,7 +201,7 @@ import Link from "next/link";
                           value={confirmPassword}
                           onChange={(e) => setConfirmPassword(e.target.value)}
                           required
-                          className="w-full h-12 sm:h-14 lg:h-16 p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+                          className="w-full h-12 sm:h-14 lg:h-16 p-3 border border-gray-300 rounded-md"
                           placeholder="Confirm Password"
                         />
                         </div>
@@ -195,14 +209,16 @@ import Link from "next/link";
                     {error && <p className="text-red-500 text-sm">{error}</p>}
                     {message && <p className="text-green-500 text-sm">{message}</p>}
                     <button type="submit"
-                    className="w-full flex justify-center items-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700">
+                    className="w-full flex justify-center items-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-black bg-[#fff4d1] hover:bg-[#f6e6b8]">
                         Register
                     </button>
                     <Link href={"/login"} className="text-blue-700 hover:underline">Already have an Account?
                 </Link>
                 </form>
+                {/* Google Sign-In Button */}
             </div>
         </div>
+      </div>
     </div>
   );
 

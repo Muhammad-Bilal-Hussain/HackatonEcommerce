@@ -8,15 +8,19 @@ const nextConfig = {
             },
             {
                 protocol: 'https',
-                hostname: 'plus.unsplash.com', // Unsplash Plus domain
+                hostname: 'plus.unsplash.com',
             },
             {
                 protocol: 'https',
-                hostname: 'images.unsplash.com', // Regular Unsplash domain
+                hostname: 'images.unsplash.com',
             },
             {
                 protocol: 'https',
                 hostname: 'next-ecommerce-template-4.vercel.app',
+            },
+            {
+                protocol: 'https',
+                hostname: 'lh3.googleusercontent.com', // Googleusercontent images allow
             },
         ],
     },
